@@ -11,11 +11,21 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".ui.login.LoginActivity">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="181dp"
+        android:layout_height="55dp"
+        android:text="@string/welcome"
+        android:textSize="36.0sp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-2dp"
+        tools:layout_editor_absoluteY="252dp" />
+
     <EditText
         android:id="@+id/username"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="304dp"
+        android:layout_marginTop="328dp"
         android:hint="@string/prompt_email"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
@@ -28,13 +38,14 @@
         android:id="@+id/password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:hint="@string/prompt_password"
         android:imeActionLabel="@string/action_sign_in_short"
         android:imeOptions="actionDone"
         android:inputType="textPassword"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username" />
 
@@ -46,13 +57,14 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="64dp"
         android:enabled="false"
-        android:text="@string/action_sign_in_short"
+        android:text="@string/log_in"
+        android:theme="@style/ButtonColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintVertical_bias="0.147" />
+        app:layout_constraintVertical_bias="0.313" />
 
     <ProgressBar
         android:id="@+id/loading"
@@ -68,12 +80,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.3" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="191dp"
-        android:layout_height="25dp"
-        android:text="@string/welcome"
-        tools:layout_editor_absoluteX="-3dp"
-        tools:layout_editor_absoluteY="271dp" />
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="228dp"
+        android:layout_height="220dp"
+        app:srcCompat="@drawable/logo"
+        tools:layout_editor_absoluteX="74dp"
+        tools:layout_editor_absoluteY="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
