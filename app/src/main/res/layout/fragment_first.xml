@@ -6,30 +6,115 @@
     android:layout_height="match_parent"
     tools:context=".FirstFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
+        android:id="@+id/OverviewLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/button_first"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/next"
-            app:layout_constraintBottom_toTopOf="@id/textview_first"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:id="@+id/SettingsBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/textview_first"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/lorem_ipsum"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button_first" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:id="@+id/RulesButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Rules" />
+
+            <TextView
+                android:id="@+id/UsernameText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="Username" />
+
+            <Button
+                android:id="@+id/ProfileSettingsButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Profile" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/MatchmakingLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/MatchmakingTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Starting a new match"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/MatchmakingDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Feel like taking on another challenge?" />
+
+            <LinearLayout
+                android:id="@+id/MatchmakingButtons"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/MatchmakingButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Matchmaking" />
+
+                <Button
+                    android:id="@+id/LocalGameButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Local Game" />
+
+                <Button
+                    android:id="@+id/MatchcodeButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Matchcode" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/MatchesLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/MatchTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ongoing matches"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/YourTurnText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Your turn! Let them know what you're worth." />
+
+            <TextView
+                android:id="@+id/OpponentTurnText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Opponents' turn! Take a break and come back later." />
+        </LinearLayout>
+    </LinearLayout>
 </androidx.core.widget.NestedScrollView>
