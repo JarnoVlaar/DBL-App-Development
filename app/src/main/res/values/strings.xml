@@ -43,4 +43,15 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="RulesButtonText">Rules</string>
+    <string name="UsernameText">Username</string>
+    <string name="ProfileButtonText">Profile</string>
+    <string name="MatchmakingTitle">Starting a new match</string>
+    <string name="MatchmakingDescription">Feel like taking on another challenge?</string>
+    <string name="MatchmakingButtonText">Matchmaking</string>
+    <string name="LocalGameButtonText">Local Game</string>
+    <string name="MatchcodeButtonText">Matchcode</string>
+    <string name="OngoingMatchestTitle">Ongoing matches</string>
+    <string name="YourTurnDescription">Your turn! Let them know what you\'re worth.</string>
+    <string name="OpponentsTurnDescription">Opponents\' turn! Take a break and come back later.</string>
 </resources>
