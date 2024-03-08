@@ -11,6 +11,15 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".ui.login.LoginActivity">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="228dp"
+        android:layout_height="220dp"
+        app:srcCompat="@drawable/logo"
+        tools:layout_editor_absoluteX="74dp"
+        tools:layout_editor_absoluteY="16dp"
+        tools:ignore="MissingConstraints" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="181dp"
@@ -50,21 +59,34 @@
         app:layout_constraintTop_toBottomOf="@+id/username" />
 
     <Button
+        android:id="@+id/forgotPassword"
+        android:layout_width="149dp"
+        android:layout_height="37dp"
+        android:backgroundTint="@color/white"
+        android:text="@string/forgot_password"
+        android:textColor="@color/LightBlue"
+        android:textSize="12.0sp"
+        android:textStyle="bold"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="446dp" />
+
+    <Button
         android:id="@+id/login"
         android:layout_width="357dp"
         android:layout_height="40dp"
         android:layout_gravity="start"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="64dp"
+        android:backgroundTint="@color/LightBlue"
         android:enabled="false"
-        android:text="@string/log_in"
-        android:theme="@style/ButtonColor"
+        android:text="@string/login"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintVertical_bias="0.313" />
+        app:layout_constraintVertical_bias="0.27" />
 
     <ProgressBar
         android:id="@+id/loading"
@@ -80,12 +102,48 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.3" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="228dp"
-        android:layout_height="220dp"
-        app:srcCompat="@drawable/logo"
-        tools:layout_editor_absoluteX="74dp"
-        tools:layout_editor_absoluteY="16dp" />
+    <TextView
+        android:id="@+id/notMember"
+        android:layout_width="85dp"
+        android:layout_height="12dp"
+        android:text="@string/not_a_member"
+        android:textSize="11sp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="100dp"
+        tools:layout_editor_absoluteY="551dp" />
+
+    <Button
+        android:id="@+id/registerNow"
+        android:layout_width="127dp"
+        android:layout_height="41dp"
+        android:backgroundTint="@color/white"
+        android:text="@string/register_now"
+        android:textColor="@color/LightBlue"
+        android:textSize="12.0sp"
+        android:textStyle="bold"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="177dp"
+        tools:layout_editor_absoluteY="538dp" />
+
+    <TextView
+        android:id="@+id/offline"
+        android:layout_width="234dp"
+        android:layout_height="21dp"
+        android:text="@string/or_continue_without_logging_in_to_play_locally"
+        android:textSize="11sp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="623dp" />
+
+    <Button
+        android:id="@+id/playOffline"
+        android:layout_width="331dp"
+        android:layout_height="45dp"
+        android:backgroundTint="@color/white"
+        android:text="@string/play_offline"
+        android:textColor="@color/LightBlue"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="649dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
