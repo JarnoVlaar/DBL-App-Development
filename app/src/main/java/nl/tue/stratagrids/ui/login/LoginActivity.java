@@ -1,136 +1,156 @@
 package nl.tue.stratagrids.ui.login;
 
-import android.app.Activity;
-
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+
+import nl.tue.stratagrids.MainActivity;
 import nl.tue.stratagrids.R;
-import nl.tue.stratagrids.ui.login.LoginViewModel;
-import nl.tue.stratagrids.ui.login.LoginViewModelFactory;
-import nl.tue.stratagrids.databinding.ActivityLoginBinding;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity{
+    EditText mEmail, mPassword;
+    Button mLoginBtn;
+    FirebaseAuth fAuth;
 
-    private LoginViewModel loginViewModel;
-    private ActivityLoginBinding binding;
+    private final String TAG = "LoginActivity";
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
 
-        binding = ActivityLoginBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        mEmail = findViewById(R.id.email);
+        mPassword = findViewById(R.id.password);
+        mLoginBtn = findViewById(R.id.loginButton);
 
-        loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
-                .get(LoginViewModel.class);
+        fAuth = FirebaseAuth.getInstance();
 
-        final EditText usernameEditText = binding.username;
-        final EditText passwordEditText = binding.password;
-        final Button loginButton = binding.login;
-        final ProgressBar loadingProgressBar = binding.loading;
+        // Click listener for Login button
+        mLoginBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                String email = mEmail.getText().toString().trim();
+                String password = mPassword.getText().toString().trim();
 
-        loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
-            @Override
-            public void onChanged(@Nullable LoginFormState loginFormState) {
-                if (loginFormState == null) {
+                if (TextUtils.isEmpty(email)) {
+                    mEmail.setError("Email is Required");
                     return;
                 }
-                loginButton.setEnabled(loginFormState.isDataValid());
-                if (loginFormState.getUsernameError() != null) {
-                    usernameEditText.setError(getString(loginFormState.getUsernameError()));
-                }
-                if (loginFormState.getPasswordError() != null) {
-                    passwordEditText.setError(getString(loginFormState.getPasswordError()));
-                }
-            }
-        });
-
-        loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
-            @Override
-            public void onChanged(@Nullable LoginResult loginResult) {
-                if (loginResult == null) {
+                if (TextUtils.isEmpty(password)) {
+                    mPassword.setError("Password is Required");
                     return;
                 }
-                loadingProgressBar.setVisibility(View.GONE);
-                if (loginResult.getError() != null) {
-                    showLoginFailed(loginResult.getError());
+                if(password.length() < 6) {
+                    mPassword.setError("Password needs to be at least 6 characters");
+                    return;
                 }
-                if (loginResult.getSuccess() != null) {
-                    updateUiWithUser(loginResult.getSuccess());
-                }
-                setResult(Activity.RESULT_OK);
 
-                //Complete and destroy login activity once successful
-                finish();
+                // Login user with fireauth
+                fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(LoginActivity.this, "Logged in", Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        } else {
+                            // Display error if login went wrong.
+                            if(!task.isSuccessful()) {
+                                String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();
+
+                                Log.d(TAG,task.getException().getMessage());
+
+                                switch (errorCode) {
+                                    case "ERROR_INVALID_CUSTOM_TOKEN":
+                                        Toast.makeText(LoginActivity.this, R.string.ERROR_INVALID_CUSTOM_TOKEN, Toast.LENGTH_LONG).show();
+                                        break;
+
+                                    case "ERROR_CUSTOM_TOKEN_MISMATCH":
+                                        Toast.makeText(LoginActivity.this, R.string.ERROR_CUSTOM_TOKEN_MISMATCH, Toast.LENGTH_LONG).show();
+                                        break;
+
+                                    case "ERROR_INVALID_CREDENTIAL":
+                                        mEmail.setError(getResources().getString(R.string.ERROR_INVALID_CREDENTIAL));
+                                        mEmail.requestFocus();
+                                        break;
+
+                                    case "ERROR_INVALID_EMAIL":
+                                        mEmail.setError(getResources().getString(R.string.ERROR_INVALID_EMAIL));
+                                        mEmail.requestFocus();
+                                        break;
+
+                                    case "ERROR_WRONG_PASSWORD":
+                                        mPassword.setError(getResources().getString(R.string.ERROR_WRONG_PASSWORD));
+                                        mPassword.requestFocus();
+                                        mPassword.setText("");
+                                        break;
+
+                                    case "ERROR_USER_MISMATCH":
+                                        Toast.makeText(LoginActivity.this, R.string.ERROR_USER_MISMATCH, Toast.LENGTH_LONG).show();
+                                        break;
+
+                                    case "ERROR_REQUIRES_RECENT_LOGIN":
+                                        Toast.makeText(LoginActivity.this, R.string.ERROR_REQUIRES_RECENT_LOGIN, Toast.LENGTH_LONG).show();
+                                        break;
+
+                                    case "ERROR_ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL":
+                                        Toast.makeText(LoginActivity.this, R.string.ERROR_ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL, Toast.LENGTH_LONG).show();
+                                        break;
+
+                                    case "ERROR_EMAIL_ALREADY_IN_USE":
+                                        mEmail.setError(getResources().getString(R.string.ERROR_EMAIL_ALREADY_IN_USE));
+                                        mEmail.requestFocus();
+                                        break;
+
+                                    case "ERROR_CREDENTIAL_ALREADY_IN_USE":
+                                        Toast.makeText(LoginActivity.this, R.string.ERROR_CREDENTIAL_ALREADY_IN_USE, Toast.LENGTH_LONG).show();
+                                        break;
+
+                                    case "ERROR_USER_DISABLED":
+                                        Toast.makeText(LoginActivity.this, R.string.ERROR_USER_DISABLED, Toast.LENGTH_LONG).show();
+                                        break;
+
+                                    case "ERROR_USER_TOKEN_EXPIRED":
+                                        Toast.makeText(LoginActivity.this, R.string.ERROR_USER_TOKEN_EXPIRED, Toast.LENGTH_LONG).show();
+                                        break;
+
+                                    case "ERROR_USER_NOT_FOUND":
+                                        Toast.makeText(LoginActivity.this, R.string.ERROR_USER_NOT_FOUND, Toast.LENGTH_LONG).show();
+                                        break;
+
+                                    case "ERROR_INVALID_USER_TOKEN":
+                                        Toast.makeText(LoginActivity.this, R.string.ERROR_INVALID_USER_TOKEN, Toast.LENGTH_LONG).show();
+                                        break;
+
+                                    case "ERROR_OPERATION_NOT_ALLOWED":
+                                        Toast.makeText(LoginActivity.this, R.string.ERROR_OPERATION_NOT_ALLOWED, Toast.LENGTH_LONG).show();
+                                        break;
+
+                                    case "ERROR_WEAK_PASSWORD":
+                                        mPassword.setError(getResources().getString(R.string.ERROR_WEAK_PASSWORD));
+                                        mPassword.requestFocus();
+                                        break;
+
+                                }                                
+                            }
+                        }
+                    }
+                });
             }
         });
 
-        TextWatcher afterTextChangedListener = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // ignore
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // ignore
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                loginViewModel.loginDataChanged(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
-            }
-        };
-        usernameEditText.addTextChangedListener(afterTextChangedListener);
-        passwordEditText.addTextChangedListener(afterTextChangedListener);
-        passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    loginViewModel.login(usernameEditText.getText().toString(),
-                            passwordEditText.getText().toString());
-                }
-                return false;
-            }
-        });
-
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadingProgressBar.setVisibility(View.VISIBLE);
-                loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
-            }
-        });
-    }
-
-    private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + model.getDisplayName();
-        // TODO : initiate successful logged in experience
-        Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
-    }
-
-    private void showLoginFailed(@StringRes Integer errorString) {
-        Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
 }

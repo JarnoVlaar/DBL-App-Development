@@ -16,6 +16,7 @@
         android:layout_width="228dp"
         android:layout_height="220dp"
         app:srcCompat="@drawable/logo"
+        android:contentDescription="@string/the_stratagrids_logo"
         tools:layout_editor_absoluteX="74dp"
         tools:layout_editor_absoluteY="16dp"
         tools:ignore="MissingConstraints" />
@@ -31,13 +32,14 @@
         tools:layout_editor_absoluteY="252dp" />
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="328dp"
         android:hint="@string/prompt_email"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
+        android:autofillHints="emailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,10 +55,11 @@
         android:imeOptions="actionDone"
         android:inputType="textPassword"
         android:selectAllOnFocus="true"
+        android:autofillHints="password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
+        app:layout_constraintTop_toBottomOf="@+id/email" />
 
     <Button
         android:id="@+id/forgotPassword"
@@ -72,14 +75,13 @@
         tools:layout_editor_absoluteY="446dp" />
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/loginButton"
         android:layout_width="357dp"
         android:layout_height="40dp"
         android:layout_gravity="start"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="64dp"
         android:backgroundTint="@color/LightBlue"
-        android:enabled="false"
         android:text="@string/login"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
