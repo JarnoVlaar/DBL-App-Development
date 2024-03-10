@@ -25,4 +25,23 @@
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/LoggedIn"
+        android:name="nl.tue.stratagrids.LoggedIn"
+        android:label="@string/logged_in_label"
+        tools:layout="@layout/logged_in">
+
+        <action
+            android:id="@+id/action_logged_in_pressed_profile"
+            app:destination="@id/ProfileSettings" />
+        <action
+            android:id="@+id/loggenInTo2ndfragment"
+            app:destination="@id/SecondFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ProfileSettings"
+        android:name="nl.tue.stratagrids.ProfileSettings"
+        android:label="@string/profile_settings_label"
+        tools:layout="@layout/profile_settings">
+    </fragment>
 </navigation>

@@ -1,6 +1,7 @@
 package nl.tue.stratagrids;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,12 +9,13 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.appcompat.app.AppCompatActivity;
 
-import nl.tue.stratagrids.databinding.FragmentFirstBinding;
+import nl.tue.stratagrids.databinding.LoggedInBinding;
 
-public class FirstFragment extends Fragment {
+public class LoggedIn extends Fragment {
 
-    private @NonNull FragmentFirstBinding binding;
+    private @NonNull LoggedInBinding binding;
 
     @Override
     public View onCreateView(
@@ -21,7 +23,7 @@ public class FirstFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding = FragmentFirstBinding.inflate(inflater, container, false);
+        binding = LoggedInBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
@@ -29,15 +31,13 @@ public class FirstFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //Generated code by android studio, but the button was removed. Might be useful for later
-        //~Thijs
-        /*binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
+        binding.ProfileSettingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(FirstFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+                NavHostFragment.findNavController(LoggedIn.this)
+                        .navigate(R.id.loggenInTo2ndfragment);
             }
-        });*/
+        });
     }
 
     @Override
@@ -46,4 +46,8 @@ public class FirstFragment extends Fragment {
         binding = null;
     }
 
+    public void navigateToProfileSettings(View view) {
+        NavHostFragment.findNavController(LoggedIn.this)
+                .navigate(R.id.loggenInTo2ndfragment);
+    }
 }

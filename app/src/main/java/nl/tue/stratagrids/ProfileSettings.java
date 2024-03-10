@@ -9,11 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import nl.tue.stratagrids.databinding.FragmentFirstBinding;
+import nl.tue.stratagrids.databinding.ProfileSettingsBinding;
 
-public class FirstFragment extends Fragment {
+public class ProfileSettings extends Fragment {
 
-    private @NonNull FragmentFirstBinding binding;
+    private @NonNull ProfileSettingsBinding binding;
 
     @Override
     public View onCreateView(
@@ -21,7 +21,7 @@ public class FirstFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding = FragmentFirstBinding.inflate(inflater, container, false);
+        binding = ProfileSettingsBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
@@ -29,12 +29,10 @@ public class FirstFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //Generated code by android studio, but the button was removed. Might be useful for later
-        //~Thijs
-        /*binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
+        /*binding.ProfileSettingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(FirstFragment.this)
+                NavHostFragment.findNavController(ProfileSettings.this)
                         .navigate(R.id.action_FirstFragment_to_SecondFragment);
             }
         });*/
