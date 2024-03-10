@@ -79,5 +79,7 @@
     <string name="ERROR_OPERATION_NOT_ALLOWED">This operation is not allowed. You must enable this service in the console.</string>
     <string name="ERROR_WEAK_PASSWORD">The given password is invalid. It must be at least 6 characters.</string>
     <string name="the_stratagrids_logo">The StrataGrids logo</string>
+    <string name="stratagrids">Stratagrids</string>
+    <string name="play_connect_conquer">Play. Connect. Conquer.</string>
 
 </resources>

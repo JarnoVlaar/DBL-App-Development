@@ -11,6 +11,14 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+
+import nl.tue.stratagrids.ui.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,7 +27,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+
+        FloatingActionButton mTempSignOutBtn = findViewById(R.id.fab);
+        mTempSignOutBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(MainActivity.this, "Logged out", Toast.LENGTH_LONG).show();
+
+            }
+            });
     }
 
     @Override
