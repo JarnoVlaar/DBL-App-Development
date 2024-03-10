@@ -12,13 +12,10 @@ import androidx.navigation.ui.NavigationUI;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
-
-import nl.tue.stratagrids.ui.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
