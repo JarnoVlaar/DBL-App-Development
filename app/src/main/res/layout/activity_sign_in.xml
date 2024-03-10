@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    tools:context=".SignInActivity">
+
+    <LinearLayout
+        android:id="@+id/titleSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="75dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sign up"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+
+            <TextView
+                android:id="@+id/subTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create an account to play online"
+                android:textSize="12dp"/>
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/LeaveSignInPage"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/white"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/x"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/UserNameSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="30dp">
+
+        <TextView
+            android:id="@+id/UserNameLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Username"
+            android:textSize="13dp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/EnterUserName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Name"
+            android:textSize="16dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/EmailSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/EmailLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email Address"
+            android:textSize="13dp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/EnterEmail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="name@email.com"
+            android:textSize="16dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/PasswordSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/PasswordLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Password"
+            android:textSize="13dp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/CreatePassword"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Create a password"
+            android:textSize="16dp"
+            android:password="true"/>
+
+        <EditText
+            android:id="@+id/ConfirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Confirm password"
+            android:textSize="16dp"
+            android:password="true"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/TermAndConditionSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
+        <CheckBox
+            android:id="@+id/CheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="I've read and agree with the Terms and conditions and the Privacy Policy."
+            android:textSize="12dp"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/SignUpButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:backgroundTint="@color/lightBlue"
+        android:text="Sign up"/>
+
+</LinearLayout>
