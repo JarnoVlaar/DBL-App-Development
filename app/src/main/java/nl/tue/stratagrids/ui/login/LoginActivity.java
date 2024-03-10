@@ -24,7 +24,7 @@ import nl.tue.stratagrids.R;
 
 public class LoginActivity extends AppCompatActivity{
     EditText mEmail, mPassword;
-    Button mLoginBtn;
+    Button mLoginBtn, mSignUpBtn;
     FirebaseAuth fAuth;
 
     private final String TAG = "LoginActivity";
@@ -39,6 +39,7 @@ public class LoginActivity extends AppCompatActivity{
         mEmail = findViewById(R.id.email);
         mPassword = findViewById(R.id.password);
         mLoginBtn = findViewById(R.id.loginButton);
+        mSignUpBtn = findViewById(R.id.registerNow);
 
         fAuth = FirebaseAuth.getInstance();
 
@@ -48,6 +49,7 @@ public class LoginActivity extends AppCompatActivity{
                 String email = mEmail.getText().toString().trim();
                 String password = mPassword.getText().toString().trim();
 
+                // Validation
                 if (TextUtils.isEmpty(email)) {
                     mEmail.setError("Email is Required");
                     return;
@@ -155,5 +157,13 @@ public class LoginActivity extends AppCompatActivity{
             }
         });
 
-    }
+
+        mSignUpBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent signUpIntent = new Intent(LoginActivity.this, SignUpActivity.class);
+                signUpIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(signUpIntent);
+            }
+    });
+}
 }

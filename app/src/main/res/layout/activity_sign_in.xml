@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
-    tools:context=".SignInActivity">
+    tools:context=".ui.login.SignUpActivity">
 
     <LinearLayout
         android:id="@+id/titleSection"

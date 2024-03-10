@@ -12,6 +12,7 @@ import androidx.navigation.ui.NavigationUI;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -27,14 +28,19 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
+        // TEMP Make email button logout the user
         FloatingActionButton mTempSignOutBtn = findViewById(R.id.fab);
         mTempSignOutBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
                 Toast.makeText(MainActivity.this, "Logged out", Toast.LENGTH_LONG).show();
-
             }
             });
+
+        // TEMP When main acitivity is created change the text to the username.
+        // Does not persist but shows the username is being stored properly
+        TextView textview = findViewById(R.id.textview_first);
+        textview.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
     }
 
     @Override

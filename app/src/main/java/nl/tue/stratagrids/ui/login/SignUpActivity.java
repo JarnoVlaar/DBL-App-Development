@@ -6,7 +6,9 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,6 +19,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 import nl.tue.stratagrids.MainActivity;
 import nl.tue.stratagrids.R;
@@ -28,6 +32,8 @@ import nl.tue.stratagrids.R;
 public class SignUpActivity extends AppCompatActivity{
     EditText mEmail, mPassword, mConfirmPassword, mUsername;
     Button mSignUpBtn;
+    ImageButton mBackButton;
+    CheckBox mTermsBox;
     FirebaseAuth fAuth;
 
     private final String TAG = "LoginActivity";
@@ -35,52 +41,93 @@ public class SignUpActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO: Change to Signup Activity
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_sign_in);
 
-        // TODO: Add correct elements when UI is ready
-        mUsername = findViewById(R.id.email);
-        mSignUpBtn = findViewById(R.id.loginButton);
-        mConfirmPassword = findViewById(R.id.password);
+        // Getting page componets
+        mUsername = findViewById(R.id.EnterUserName);
+        mEmail = findViewById(R.id.EnterEmail);
+        mPassword = findViewById(R.id.CreatePassword);
+        mConfirmPassword = findViewById(R.id.ConfirmPassword);
 
+        mSignUpBtn = findViewById(R.id.SignUpButton);
+        mBackButton = findViewById(R.id.LeaveSignInPage);
 
-
-        mEmail = findViewById(R.id.email);
-        mPassword = findViewById(R.id.password);
-
-
-
+        mTermsBox = findViewById(R.id.CheckBox);
 
         fAuth = FirebaseAuth.getInstance();
 
         // Click listener for Login button
         mSignUpBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                String username = mUsername.getText().toString().trim();
                 String email = mEmail.getText().toString().trim();
                 String password = mPassword.getText().toString().trim();
+                String confirmPassword = mConfirmPassword.getText().toString().trim();
 
+                // Validation
+                if (TextUtils.isEmpty(username)) {
+                    mUsername.setError("Username is required.");
+                    mUsername.requestFocus();
+                    return;
+                }
                 if (TextUtils.isEmpty(email)) {
-                    mEmail.setError("Email is Required");
+                    mEmail.setError("Email is required");
+                    mEmail.requestFocus();
                     return;
                 }
                 if (TextUtils.isEmpty(password)) {
-                    mPassword.setError("Password is Required");
+                    mPassword.setError("Password is required");
+                    mPassword.requestFocus();
                     return;
                 }
                 if(password.length() < 6) {
                     mPassword.setError("Password needs to be at least 6 characters");
+                    mPassword.requestFocus();
+                    return;
+                }
+                if(!password.equals(confirmPassword)) {
+                    mPassword.setError("Passwords do not match");
+                    mConfirmPassword.setError("Passwords do not match");
+                    mConfirmPassword.requestFocus();
+                    return;
+                }
+                if(!mTermsBox.isChecked()) {
+                    mTermsBox.setError("You need to accept the Terms and Conditions and the Privacy Policy to proceed.");
+                    mTermsBox.requestFocus();
                     return;
                 }
 
-                // Login user with fireauth
-                fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
+                // Signup user with fireauth
+                fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(SignUpActivity.this, "Logged in", Toast.LENGTH_LONG).show();
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
+                            // Add username to user
+                            FirebaseUser user = fAuth.getCurrentUser();
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(username)
+                                    //.setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
+                                    .build();
+
+                            user.updateProfile(profileUpdates)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Log.d(TAG, "User profile updated.");
+                                            }
+                                        }
+                                    });
+
+                            finish();
+                            finishAffinity();
+
                         } else {
-                            // Display error if login went wrong.
+                            // Display error if signup went wrong.
                             if(!task.isSuccessful()) {
                                 String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();
 
@@ -165,5 +212,11 @@ public class SignUpActivity extends AppCompatActivity{
             }
         });
 
+        // Back button functionality
+        mBackButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                finish();
+            }
+            });
     }
 }
