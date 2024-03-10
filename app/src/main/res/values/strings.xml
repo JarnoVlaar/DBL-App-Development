@@ -81,5 +81,15 @@
     <string name="the_stratagrids_logo">The StrataGrids logo</string>
     <string name="stratagrids">Stratagrids</string>
     <string name="play_connect_conquer">Play. Connect. Conquer.</string>
+    <string name="username">Username</string>
+    <string name="name">Name</string>
+    <string name="sign_up">Sign up</string>
+    <string name="create_an_account_to_play_online">Create an account to play online</string>
+    <string name="email_address">Email Address</string>
+    <string name="name_email_com">name@email.com</string>
+    <string name="password">Password</string>
+    <string name="create_a_password">Create a password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="i_ve_read_and_agree_with_the_terms_and_conditions_and_the_privacy_policy">I have read and agree with the Terms and Conditions and the Privacy Policy.</string>
 
 </resources>
