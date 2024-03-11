@@ -15,7 +15,6 @@
         android:drawableLeft="@drawable/arrow_back_ios_24px"
         android:theme="@style/ButtonIcon"
         app:layout_constraintBottom_toTopOf="@+id/ProfilePicture"
-        app:layout_constraintEnd_toStartOf="@+id/textAccount"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,7 +29,7 @@
         android:theme="@style/BoldText"
         app:layout_constraintBottom_toTopOf="@+id/ProfilePicture"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/ProfileSettingsBackButton"
         app:layout_constraintTop_toTopOf="parent" />
 
 
