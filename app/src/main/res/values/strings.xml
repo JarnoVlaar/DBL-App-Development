@@ -1,9 +1,6 @@
 <resources>
     <string name="app_name">StrataGrids</string>
     <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
     <string name="logged_in_label">Logged In Overview</string>
     <string name="profile_settings_label">Profile Settings</string>
     <string name="next">Next</string>
@@ -45,6 +42,8 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+
+    <!-- Overview Activity strings-->
     <string name="RulesButtonText">Rules</string>
     <string name="UsernameText">Username</string>
     <string name="ProfileButtonText">Profile</string>
@@ -56,7 +55,10 @@
     <string name="OngoingMatchestTitle">Ongoing matches</string>
     <string name="YourTurnDescription">Your turn! Let them know what you\'re worth.</string>
     <string name="OpponentsTurnDescription">Opponents\' turn! Take a break and come back later.</string>
+
+    <!-- Profile Settings Activity strings-->
     <string name="title_activity_profile_settings">ProfileSettingsActivity</string>
+    <string name="account_text">Account</string>
 
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
@@ -72,4 +74,16 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="diagnosticsText">Diagnostics</string>
+    <string name="ManagmentDescriptionText">You are in control of your account</string>
+    <string name="ManagementTitleText">Management</string>
+    <string name="ProfilePictureDescription">Profile picture of the user</string>
+    <string name="NumberOfMatchesLostText">Number of matches lost:</string>
+    <string name="NumberOfTiesText">Number of matches tied:</string>
+    <string name="StatisticsTitleText">Statistics</string>
+    <string name="NumberOfWinsText">Number of matches won:</string>
+    <string name="LogoutButtonText">Logout</string>
+    <string name="DeleteAccountButtonText">Delete Account</string>
+    <string name="ProfileSettingsBackButtonText">Return to the overview activity</string>
+    <string name="DiagnosticsCheckBoxText">Help us improve the game by opting-in for sending us diagnostics information</string>
 </resources>
