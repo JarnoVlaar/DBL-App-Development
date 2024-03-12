@@ -10,10 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
-import androidx.core.view.WindowCompat;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
@@ -23,6 +20,7 @@ import nl.tue.stratagrids.databinding.ActivityMainBinding;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ViewFlipper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,23 +49,8 @@ public class MainActivity extends AppCompatActivity {
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
-        Button profileButton = findViewById(R.id.ProfileSettingsButton);
+        setButtons();
 
-        profileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, ProfileSettingsActivity.class));
-            }
-        });
-
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAnchorView(R.id.fab)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     @Override
@@ -107,5 +90,48 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return false;
+    }
+
+    void setButtons() {
+        Button profileButton = (Button)findViewById(R.id.ProfileSettingsButton);
+
+        profileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, ProfileSettingsActivity.class));
+            }
+        });
+
+        Button logoutButton = (Button)findViewById(R.id.TempLogoutButton);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switchIncludeLayout(false);
+            }
+        });
+
+        Button loginButton = (Button)findViewById(R.id.LoginButton);
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switchIncludeLayout(true);
+            }
+        });
+    }
+
+    /**
+     * Switch main activity between logged in and logged out.
+     *
+     * @param login if true, then switch to login. If false, switch to log out.
+     */
+    public void switchIncludeLayout(boolean login) {
+        ViewFlipper vf = (ViewFlipper)findViewById(R.id.IncludeLayout);
+        int id = (login) ? 0 : 1;
+        vf.setDisplayedChild(id);
+
+        Button b1 = (Button)findViewById(R.id.MatchmakingButton);
+        b1.setEnabled(login);
+        Button b2 = (Button)findViewById(R.id.MatchcodeButton);
+        b2.setEnabled(login);
     }
 }

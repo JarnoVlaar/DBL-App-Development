@@ -83,7 +83,14 @@
     <string name="StatisticsTitleText">Statistics</string>
     <string name="NumberOfWinsText">Number of matches won:</string>
     <string name="LogoutButtonText">Logout</string>
+    <string name="LoginButtonText">Login</string>
     <string name="DeleteAccountButtonText">Delete Account</string>
     <string name="ProfileSettingsBackButtonText">Return to the overview activity</string>
     <string name="DiagnosticsCheckBoxText">Help us improve the game by opting-in for sending us diagnostics information</string>
+    <string name="OngoingMatches">Ongoing matches</string>
+    <string name="LoggedOutDescriptionText">It seems you are logged out, that\'s a bummer! This is where you\'ll find your ongoing matches.</string>
+    <string name="NoConnectionImageDescription">Logged out cloud image</string>
+    <string name="FeaturesDisabledDescription">Login to an existing account, or create a new one to access:</string>
+    <string name="OnlineMatchmakingText">•Online matchmaking</string>
+    <string name="OnlineMatchesWithFriendsText">•Online matches with friends</string>
 </resources>
