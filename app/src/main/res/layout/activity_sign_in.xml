@@ -40,11 +40,11 @@
 
         <ImageButton
             android:id="@+id/LeaveSignInPage"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:backgroundTint="@color/white"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/x"/>
+            app:srcCompat="@drawable/baseline_close_24"/>
     </LinearLayout>
 
     <LinearLayout
@@ -112,17 +112,17 @@
             android:id="@+id/CreatePassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:inputType="textPassword"
             android:hint="@string/create_a_password"
-            android:textSize="18sp"
-            android:password="true"/>
+            android:textSize="18sp"/>
 
         <EditText
             android:id="@+id/ConfirmPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:inputType="textPassword"
             android:hint="@string/confirm_password"
-            android:textSize="18sp"
-            android:password="true"/>
+            android:textSize="18sp"/>
     </LinearLayout>
 
     <LinearLayout
