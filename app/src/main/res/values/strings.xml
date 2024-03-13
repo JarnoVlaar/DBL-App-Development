@@ -47,12 +47,12 @@
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
+    <string name="welcome">"Welcome!"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="log_in">Log in</string>
-    <string name="login">login</string>
+    <string name="login">Login</string>
     <string name="forgot_password">Forgot password?</string>
     <string name="not_a_member">Not a member?</string>
     <string name="register_now">Register now</string>
@@ -143,4 +143,5 @@
     <string name="OnlineMatchmakingText">•Online matchmaking</string>
     <string name="OnlineMatchesWithFriendsText">•Online matches with friends</string>
     <string name="offlineText">Offline</string>
+    <string name="example_email_com">example@email.com</string>
 </resources>

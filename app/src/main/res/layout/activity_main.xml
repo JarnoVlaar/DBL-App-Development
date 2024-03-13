@@ -35,7 +35,7 @@
             android:id="@+id/SettingsBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/lightBlue"
+            android:background="@color/blue"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@id/MatchmakingLayout"
             app:layout_constraintTop_toTopOf="parent"

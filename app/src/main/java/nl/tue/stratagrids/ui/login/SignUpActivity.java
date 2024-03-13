@@ -31,8 +31,7 @@ import nl.tue.stratagrids.R;
  */
 public class SignUpActivity extends AppCompatActivity{
     EditText mEmail, mPassword, mConfirmPassword, mUsername;
-    Button mSignUpBtn;
-    ImageButton mBackButton;
+    Button mSignUpBtn, mBackButton;
     CheckBox mTermsBox;
     FirebaseAuth fAuth;
 
