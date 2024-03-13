@@ -1,0 +1,107 @@
+
+//List of modules that don't require Jacoco
+def ignoredByJacoco = []
+def fileFilter = []
+def buildKotlinClasses = "/tmp/kotlin-classes/debug"
+def buildJavaClasses = "/intermediates/javac/debug/classes"
+def testExecutionFile = "/outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec"
+
+//List of files that can be ignored for test coverage
+ext {
+    coverageExclusions = [
+            '**/*Activity*.*',
+            '**/*Fragment*.*',
+            '**/R.class',
+            '**/R$*.class',
+            '**/BuildConfig.*',
+    ]
+}
+
+/**
+ *  Apply additional build steps to sub-projects
+ */
+subprojects { project ->
+    def projectName = project.name
+    def projectBuildFolder = project.buildDir
+    def projectFolder = project.projectDir
+
+
+    // Apply Jacoco only if the project is not in the ignore list
+    if (!ignoredByJacoco.contains(projectName)) {
+        apply plugin: 'jacoco'
+        jacoco {
+            version '0.8.7'
+        }
+
+
+        task jacocoReport(type: JacocoReport, dependsOn: 'testDebugUnitTest') {
+            group = 'Reporting'
+            description = 'Generate Jacoco coverage reports after running tests.'
+
+            def debugTree = fileTree('directory does not exists') // I know it's ugly :)
+
+            def buildDebug = ["$projectBuildFolder" + "$buildKotlinClasses",
+                              "$projectBuildFolder" + "$buildJavaClasses"]
+
+            buildDebug.each { classPath ->
+                debugTree += fileTree(dir: classPath, includes: fileFilter,  excludes: coverageExclusions)
+            }
+
+            def mainSrc = "$projectFolder/src/main/java"
+            sourceDirectories.from = files([mainSrc])
+            classDirectories.from = files([debugTree])
+            executionData.from = files("$projectBuildFolder" + "$testExecutionFile")
+
+            reports {
+                xml.required = true
+                html.required = true
+            }
+
+        }
+    }
+}
+
+
+/**
+ *  Root task that generates an aggregated Jacoco test coverage report for all sub-projects
+ */
+task jacocoFullReport(name: 'jacocoFullReport', type: JacocoReport, group: 'Coverage reports') {
+    group = 'Reporting'
+    description = 'Generates an aggregate report from all subprojects'
+
+    // Get list of projects which should be included in the report
+    def projects = new ArrayList()
+    subprojects.each { prj ->
+        if (!ignoredByJacoco.contains(prj.name)) {
+            projects.add(prj)
+        }
+    }
+
+    //noinspection GrUnresolvedAccess
+    dependsOn(projects.jacocoReport)
+
+    def dirs = []
+    def tree = fileTree('directory does not exists') // I know it's ugly :)
+
+    projects.each { prj ->
+        dirs.add("${prj.name}/src/main/java")
+
+
+        def buildDebug = ["$prj.buildDir" + "$buildKotlinClasses",
+                          "$prj.buildDir" + "$buildJavaClasses"]
+
+        buildDebug.each { classPath ->
+            tree += fileTree(dir: classPath, includes: fileFilter, excludes: coverageExclusions)
+        }
+    }
+
+    additionalSourceDirs.setFrom(files(dirs))
+    sourceDirectories.from = files(dirs)
+    classDirectories.from = tree
+    executionData.from = files(projects.jacocoReport.executionData)
+
+    reports {
+        xml.required = true
+        html.required = true
+    }
+}
