@@ -28,6 +28,11 @@
             android:theme="@style/Theme.StrataGrids">
         </activity>
         <activity
+            android:name=".ProfileSettingsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.StrataGrids">
+        </activity>
+        <activity
             android:name=".SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.StrataGrids">

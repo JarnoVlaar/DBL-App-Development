@@ -35,7 +35,7 @@
             android:id="@+id/SettingsBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/light_blue"
+            android:background="@color/lightBlue"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@id/MatchmakingLayout"
             app:layout_constraintTop_toTopOf="parent"
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
-                android:text="@string/UsernameText" />
+                android:text="@string/offlineText" />
 
             <Button
                 android:id="@+id/ProfileSettingsButton"
@@ -147,14 +147,6 @@
             <include android:id="@+id/IncludeLoggedIn" layout="@layout/logged_in" />
             <include android:id="@+id/IncludeLoggedOut" layout="@layout/logged_out" />
         </ViewFlipper>
-
-        <Button
-            android:id="@+id/TempLogoutButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TempLogout"
-            app:layout_constraintTop_toBottomOf="@id/IncludeLayout"
-            android:gravity="center_horizontal"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

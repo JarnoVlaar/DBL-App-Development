@@ -24,7 +24,7 @@ import nl.tue.stratagrids.R;
 
 public class LoginActivity extends AppCompatActivity{
     EditText mEmail, mPassword;
-    Button mLoginBtn, mSignUpBtn;
+    Button mLoginBtn, mSignUpBtn, mOfflinePlayBtn;
     FirebaseAuth fAuth;
 
     private final String TAG = "LoginActivity";
@@ -40,6 +40,7 @@ public class LoginActivity extends AppCompatActivity{
         mPassword = findViewById(R.id.password);
         mLoginBtn = findViewById(R.id.loginButton);
         mSignUpBtn = findViewById(R.id.registerNow);
+        mOfflinePlayBtn = findViewById(R.id.playOffline);
 
         fAuth = FirebaseAuth.getInstance();
 
@@ -71,6 +72,7 @@ public class LoginActivity extends AppCompatActivity{
                             Toast.makeText(LoginActivity.this, "Logged in", Toast.LENGTH_LONG).show();
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             finish();
+                            finishAffinity();
                         } else {
                             // Display error if login went wrong.
                             if(!task.isSuccessful()) {
@@ -165,5 +167,14 @@ public class LoginActivity extends AppCompatActivity{
                 startActivity(signUpIntent);
             }
     });
+
+        mOfflinePlayBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
+                loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(loginIntent);
+                finish();
+            }
+        });
 }
 }

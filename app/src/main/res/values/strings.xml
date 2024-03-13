@@ -142,4 +142,5 @@
     <string name="FeaturesDisabledDescription">Login to an existing account, or create a new one to access:</string>
     <string name="OnlineMatchmakingText">•Online matchmaking</string>
     <string name="OnlineMatchesWithFriendsText">•Online matches with friends</string>
+    <string name="offlineText">Offline</string>
 </resources>

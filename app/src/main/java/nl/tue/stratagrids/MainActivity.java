@@ -1,5 +1,6 @@
 package nl.tue.stratagrids;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -11,10 +12,13 @@ import android.view.View;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import nl.tue.stratagrids.databinding.ActivityMainBinding;
+import nl.tue.stratagrids.ui.login.LoginActivity;
+import nl.tue.stratagrids.ui.login.SignUpActivity;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import android.widget.Button;
 import android.widget.ViewFlipper;
@@ -32,25 +37,26 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
 
+    FirebaseAuth fAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
 
-        // TEMP Make email button logout the user
-        FloatingActionButton mTempSignOutBtn = findViewById(R.id.fab);
-        mTempSignOutBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
-                Toast.makeText(MainActivity.this, "Logged out", Toast.LENGTH_LONG).show();
-            }
-            });
+        setButtons();
 
-        // TEMP When main acitivity is created change the text to the username.
-        // Does not persist but shows the username is being stored properly
-        TextView textview = findViewById(R.id.textview_first);
-        textview.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+        fAuth = FirebaseAuth.getInstance();
+
+        // Set username to top bar if user is logged in
+        if (fAuth.getCurrentUser() != null) {
+            TextView textview = findViewById(R.id.UsernameText);
+            textview.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+            switchIncludeLayout(true);
+        } else {
+            switchIncludeLayout(false);
+        }
     }
 
     @Override
@@ -93,20 +99,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void setButtons() {
-        Button profileButton = (Button)findViewById(R.id.ProfileSettingsButton);
-
-        profileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
+        Button profileSettingsButton = findViewById(R.id.ProfileSettingsButton);
+        profileSettingsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, ProfileSettingsActivity.class));
-            }
-        });
+                if (fAuth.getCurrentUser() != null) {
+                    Intent signUpIntent = new Intent(MainActivity.this, ProfileSettingsActivity.class);
+                    signUpIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(signUpIntent);
+                } else {
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                }
 
-        Button logoutButton = (Button)findViewById(R.id.TempLogoutButton);
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switchIncludeLayout(false);
             }
         });
 
@@ -114,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switchIncludeLayout(true);
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
             }
         });
     }
