@@ -75,7 +75,6 @@
             android:inputType="textPassword"
             android:selectAllOnFocus="true"
             android:autofillHints="password"
-            android:password="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -91,6 +90,7 @@
             android:textColor="@color/blue"
             android:textSize="12.0sp"
             android:paddingStart="0dp"
+            android:paddingEnd="0dp"
             android:textStyle="bold"
             tools:ignore="MissingConstraints" />
     </LinearLayout>

@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Objects;
+
 import nl.tue.stratagrids.ui.login.LoginActivity;
 
 public class ProfileSettingsActivity extends AppCompatActivity {
@@ -29,7 +31,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         logoutButton = findViewById(R.id.LogoutButton);
 
         TextView textview = findViewById(R.id.UsernameText);
-        textview.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+        textview.setText(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getDisplayName());
 
         fAuth = FirebaseAuth.getInstance();
 
@@ -38,22 +40,16 @@ public class ProfileSettingsActivity extends AppCompatActivity {
             textview.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
         }
 
-        backButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        backButton.setOnClickListener(view -> finish());
 
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
-                Toast.makeText(ProfileSettingsActivity.this, "Logged Out", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(ProfileSettingsActivity.this, LoginActivity.class));
+        logoutButton.setOnClickListener(view -> {
+            FirebaseAuth.getInstance().signOut();
+            Toast.makeText(ProfileSettingsActivity.this, "Logged Out", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(ProfileSettingsActivity.this, LoginActivity.class));
 
-                finish();
-                finishAffinity();
+            finish();
+            finishAffinity();
 
-            }
         });
     }
 }
