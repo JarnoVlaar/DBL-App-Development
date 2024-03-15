@@ -1,9 +1,8 @@
 <resources>
     <string name="app_name">StrataGrids</string>
     <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
+    <string name="logged_in_label">Logged In Overview</string>
+    <string name="profile_settings_label">Profile Settings</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
@@ -48,12 +47,12 @@
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
+    <string name="welcome">"Welcome!"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="log_in">Log in</string>
-    <string name="login">login</string>
+    <string name="login">Login</string>
     <string name="forgot_password">Forgot password?</string>
     <string name="not_a_member">Not a member?</string>
     <string name="register_now">Register now</string>
@@ -92,4 +91,57 @@
     <string name="confirm_password">Confirm password</string>
     <string name="i_ve_read_and_agree_with_the_terms_and_conditions_and_the_privacy_policy">I have read and agree with the Terms and Conditions and the Privacy Policy.</string>
 
+
+    <!-- Overview Activity strings-->
+    <string name="RulesButtonText">Rules</string>
+    <string name="UsernameText">Username</string>
+    <string name="ProfileButtonText">Profile</string>
+    <string name="MatchmakingTitle">Starting a new match</string>
+    <string name="MatchmakingDescription">Feel like taking on another challenge?</string>
+    <string name="MatchmakingButtonText">Matchmaking</string>
+    <string name="LocalGameButtonText">Local Game</string>
+    <string name="MatchcodeButtonText">Matchcode</string>
+    <string name="OngoingMatchestTitle">Ongoing matches</string>
+    <string name="YourTurnDescription">Your turn! Let them know what you\'re worth.</string>
+    <string name="OpponentsTurnDescription">Opponents\' turn! Take a break and come back later.</string>
+
+    <!-- Profile Settings Activity strings-->
+    <string name="title_activity_profile_settings">ProfileSettingsActivity</string>
+    <string name="account_text">Account</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="diagnosticsText">Diagnostics</string>
+    <string name="ManagmentDescriptionText">You are in control of your account</string>
+    <string name="ManagementTitleText">Management</string>
+    <string name="ProfilePictureDescription">Profile picture of the user</string>
+    <string name="NumberOfMatchesLostText">Number of matches lost:</string>
+    <string name="NumberOfTiesText">Number of matches tied:</string>
+    <string name="StatisticsTitleText">Statistics</string>
+    <string name="NumberOfWinsText">Number of matches won:</string>
+    <string name="LogoutButtonText">Logout</string>
+    <string name="LoginButtonText">Login</string>
+    <string name="DeleteAccountButtonText">Delete Account</string>
+    <string name="ProfileSettingsBackButtonText">Return to the overview activity</string>
+    <string name="DiagnosticsCheckBoxText">Help us improve the game by opting-in for sending us diagnostics information</string>
+    <string name="OngoingMatches">Ongoing matches</string>
+    <string name="LoggedOutDescriptionText">It seems you are logged out, that\'s a bummer! This is where you\'ll find your ongoing matches.</string>
+    <string name="NoConnectionImageDescription">Logged out cloud image</string>
+    <string name="FeaturesDisabledDescription">Login to an existing account, or create a new one to access:</string>
+    <string name="OnlineMatchmakingText">•Online matchmaking</string>
+    <string name="OnlineMatchesWithFriendsText">•Online matches with friends</string>
+    <string name="offlineText">Offline</string>
+    <string name="example_email_com">example@email.com</string>
 </resources>

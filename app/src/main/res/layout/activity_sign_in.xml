@@ -38,13 +38,18 @@
                 android:textSize="14sp"/>
         </LinearLayout>
 
-        <ImageButton
+        <Button
             android:id="@+id/LeaveSignInPage"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:backgroundTint="@color/white"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:backgroundTint="@color/transparent"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/baseline_close_24"/>
+            android:drawableRight="@drawable/close"
+            android:scaleX="2"
+            android:scaleY="2"
+
+
+            app:srcCompat="@drawable/x"/>
     </LinearLayout>
 
     <LinearLayout
@@ -67,6 +72,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/name"
+            android:autofillHints="name"
+            android:inputType="textPersonName"
+            android:background="@drawable/edittext_round"
+            android:padding="10dip"
+            android:layout_marginTop="5dp"
+
             android:textSize="18sp"/>
     </LinearLayout>
 
@@ -89,7 +100,12 @@
             android:id="@+id/EnterEmail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="@string/name_email_com"
+            android:hint="@string/example_email_com"
+            android:autofillHints="emailAddress"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/edittext_round"
+            android:padding="10dip"
+            android:layout_marginTop="5dp"
             android:textSize="18sp"/>
     </LinearLayout>
 
@@ -106,23 +122,32 @@
             android:layout_height="wrap_content"
             android:text="@string/password"
             android:textSize="14sp"
+            android:layout_marginTop="5dp"
             android:textStyle="bold"/>
 
         <EditText
             android:id="@+id/CreatePassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="textPassword"
-            android:hint="@string/create_a_password"
-            android:textSize="18sp"/>
+            android:hint="@string/password"
+            android:autofillHints="password"
+            android:textSize="18sp"
+            android:background="@drawable/edittext_round"
+            android:padding="10dip"
+            android:layout_marginTop="5dp"
+            android:inputType="textPassword"/>
 
         <EditText
             android:id="@+id/ConfirmPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="textPassword"
             android:hint="@string/confirm_password"
-            android:textSize="18sp"/>
+            android:autofillHints="password"
+            android:textSize="18sp"
+            android:background="@drawable/edittext_round"
+            android:padding="10dip"
+            android:layout_marginTop="10dp"
+            android:inputType="textPassword"/>
     </LinearLayout>
 
     <LinearLayout
@@ -151,7 +176,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:backgroundTint="@color/lightBlue"
+        android:backgroundTint="@color/blue"
         android:text="@string/sign_up"
         android:focusable="true"
         android:layout_marginTop="15dp"/>

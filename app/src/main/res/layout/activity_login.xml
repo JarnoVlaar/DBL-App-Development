@@ -17,13 +17,14 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="25dp">
+
         <ImageView
             android:id="@+id/imageStrataLogo"
             android:layout_width="wrap_content"
             android:layout_height="250dp"
-            app:srcCompat="@drawable/logo"
             android:contentDescription="@string/the_stratagrids_logo"
-            tools:ignore="MissingConstraints"/>
+            app:srcCompat="@drawable/stratagridslogo"
+            tools:ignore="MissingConstraints" />
     </LinearLayout>
 
     <LinearLayout
@@ -45,14 +46,17 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="20dp">
+
         <EditText
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:autofillHints="emailAddress"
+            android:background="@drawable/edittext_round"
+            android:padding="10dip"
             android:hint="@string/prompt_email"
             android:inputType="textEmailAddress"
             android:selectAllOnFocus="true"
-            android:autofillHints="emailAddress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -62,13 +66,15 @@
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:hint="@string/prompt_password"
             android:imeActionLabel="@string/action_sign_in_short"
+            android:background="@drawable/edittext_round"
+            android:padding="10dip"
             android:imeOptions="actionDone"
             android:inputType="textPassword"
             android:selectAllOnFocus="true"
             android:autofillHints="password"
-            android:password="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -76,15 +82,17 @@
 
         <Button
             android:id="@+id/forgotPassword"
-            android:layout_width="149dp"
+            android:layout_width="wrap_content"
             android:layout_height="37dp"
-            android:layout_marginLeft="-20dp"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/transparent"
             android:text="@string/forgot_password"
-            android:textColor="@color/lightBlue"
+            android:gravity="start|center_vertical"
+            android:textColor="@color/blue"
             android:textSize="12.0sp"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"
             android:textStyle="bold"
-            tools:ignore="MissingConstraints"/>
+            tools:ignore="MissingConstraints" />
     </LinearLayout>
 
     <LinearLayout
@@ -97,7 +105,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:backgroundTint="@color/lightBlue"
+            android:backgroundTint="@color/blue"
             android:text="@string/login"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -139,9 +147,9 @@
                 android:id="@+id/registerNow"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/transparent"
                 android:text="@string/register_now"
-                android:textColor="@color/lightBlue"
+                android:textColor="@color/blue"
                 android:textSize="12.0sp"
                 android:textStyle="bold"
                 android:layout_weight="1"
@@ -174,11 +182,13 @@
             android:id="@+id/playOffline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
+            android:layout_marginTop="5dp"
             android:text="@string/play_offline"
-            android:textColor="@color/lightBlue"
+            android:textColor="@color/blue"
             android:gravity="center"
-            tools:ignore="MissingConstraints"/>
+            android:theme="@style/ButtonWhite"
+
+            />
     </LinearLayout>
 
 
