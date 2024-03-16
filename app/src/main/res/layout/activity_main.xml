@@ -35,11 +35,10 @@
             android:id="@+id/SettingsBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/blue"
+            android:background="@color/light_blue"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@id/MatchmakingLayout"
-            app:layout_constraintTop_toTopOf="parent"
-            android:paddingBottom="10dp">
+            app:layout_constraintTop_toTopOf="parent">
 
             <Button
                 android:id="@+id/RulesButton"
