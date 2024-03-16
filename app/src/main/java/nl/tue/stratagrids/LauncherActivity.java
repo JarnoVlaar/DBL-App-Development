@@ -10,7 +10,12 @@ import com.google.firebase.auth.FirebaseUser;
 
 import nl.tue.stratagrids.ui.login.LoginActivity;
 
-public class SplashActivity extends AppCompatActivity {
+/**
+ * Activity that opens when you open the app, which will proceed to the required activity
+ * based on if the user is logged in or not.
+ * This uses a splashscreen for a layout but this is never visible.
+ */
+public class LauncherActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,11 +24,11 @@ public class SplashActivity extends AppCompatActivity {
         if (user != null) {
             // User is signed in
             // Start home activity
-            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+            startActivity(new Intent(LauncherActivity.this, MainActivity.class));
         } else {
             // No user is signed in
             // start login activity
-            startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+            startActivity(new Intent(LauncherActivity.this, LoginActivity.class));
         }
 
         // close splash activity
