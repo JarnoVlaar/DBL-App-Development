@@ -1,78 +1,74 @@
 package nl.tue.stratagrids;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.View;
+import nl.tue.stratagrids.ui.login.LoginActivity;
 
-import androidx.core.view.WindowCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+import android.widget.TextView;
 
-import nl.tue.stratagrids.databinding.ActivityMainBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import android.widget.Button;
+import android.widget.ViewFlipper;
 
-import android.view.Menu;
-import android.view.MenuItem;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-    private AppBarConfiguration appBarConfiguration;
-    private ActivityMainBinding binding;
+    FirebaseAuth fAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_main);
 
-        setSupportActionBar(binding.toolbar);
+        setButtons();
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        fAuth = FirebaseAuth.getInstance();
 
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAnchorView(R.id.fab)
-                        .setAction("Action", null).show();
-            }
-        });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        // Set username to top bar if user is logged in
+        if (fAuth.getCurrentUser() != null) {
+            TextView textview = findViewById(R.id.UsernameText);
+            textview.setText(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getDisplayName());
+            switchIncludeLayout(true);
+        } else {
+            switchIncludeLayout(false);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
+    void setButtons() {
+        Button profileSettingsButton = findViewById(R.id.ProfileSettingsButton);
+        profileSettingsButton.setOnClickListener(view -> {
+            if (fAuth.getCurrentUser() != null) {
+                Intent signUpIntent = new Intent(MainActivity.this, ProfileSettingsActivity.class);
+                signUpIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(signUpIntent);
+            } else {
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            }
+
+        });
+
+        Button loginButton = findViewById(R.id.LoginButton);
+        loginButton.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, LoginActivity.class)));
+    }
+
+    /**
+     * Switch main activity between logged in and logged out.
+     *
+     * @param login if true, then switch to login. If false, switch to log out.
+     */
+    public void switchIncludeLayout(boolean login) {
+        ViewFlipper vf = findViewById(R.id.IncludeLayout);
+        int id = (login) ? 0 : 1;
+        vf.setDisplayedChild(id);
+
+        Button b1 = findViewById(R.id.MatchmakingButton);
+        b1.setEnabled(login);
+        Button b2 = findViewById(R.id.MatchcodeButton);
+        b2.setEnabled(login);
     }
 }
