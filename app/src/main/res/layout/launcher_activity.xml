@@ -22,7 +22,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.152"
-        app:srcCompat="@drawable/logo"
+        app:srcCompat="@drawable/stratagridslogo"
         tools:ignore="MissingConstraints" />
 
     <TextView

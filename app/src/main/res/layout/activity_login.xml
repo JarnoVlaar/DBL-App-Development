@@ -140,7 +140,7 @@
                 android:text="@string/not_a_member"
                 android:textSize="12sp"
                 android:layout_weight="1"
-                android:gravity="right"
+                android:gravity="end"
                 tools:ignore="MissingConstraints"/>
 
             <Button
@@ -153,7 +153,7 @@
                 android:textSize="12.0sp"
                 android:textStyle="bold"
                 android:layout_weight="1"
-                android:gravity="left"
+                android:gravity="start"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

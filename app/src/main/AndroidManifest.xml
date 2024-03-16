@@ -33,7 +33,7 @@
             android:theme="@style/Theme.StrataGrids">
         </activity>
         <activity
-            android:name=".SplashActivity"
+            android:name=".LauncherActivity"
             android:exported="true"
             android:theme="@style/Theme.StrataGrids">
             <intent-filter>

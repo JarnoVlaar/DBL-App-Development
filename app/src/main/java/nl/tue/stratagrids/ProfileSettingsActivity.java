@@ -16,7 +16,8 @@ import nl.tue.stratagrids.ui.login.LoginActivity;
 
 public class ProfileSettingsActivity extends AppCompatActivity {
 
-    Button backButton, logoutButton;
+    Button backButton;
+    Button logoutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

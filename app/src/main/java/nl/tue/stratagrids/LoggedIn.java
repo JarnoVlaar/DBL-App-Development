@@ -25,10 +25,6 @@ public class LoggedIn extends Fragment {
 
     }
 
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
