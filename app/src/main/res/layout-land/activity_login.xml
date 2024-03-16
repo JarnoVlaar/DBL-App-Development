@@ -162,30 +162,32 @@
                     app:layout_constraintVertical_bias="0.0"
                     tools:ignore="MissingConstraints"/>
             </LinearLayout>
-
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/offline"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/or_continue_without_logging_in_to_play_locally"
-            android:textSize="13sp"
-            android:gravity="center"
-            tools:ignore="MissingConstraints"/>
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/offline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/or_continue_without_logging_in_to_play_locally"
+                android:textSize="13sp"
+                android:gravity="center"
+                tools:ignore="MissingConstraints"/>
 
-        <Button
-            android:id="@+id/playOffline"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginTop="5dp"
-            android:text="@string/play_offline"
-            android:textColor="@color/blue"
-            android:gravity="center"
-            android:theme="@style/ButtonWhite"/>
+            <Button
+                android:id="@+id/playOffline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/play_offline"
+                android:textColor="@color/blue"
+                android:gravity="center"
+                android:theme="@style/ButtonWhite"/>
+        </LinearLayout>
     </LinearLayout>
-
-
 </LinearLayout>
