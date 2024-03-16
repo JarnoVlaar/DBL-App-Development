@@ -23,7 +23,7 @@
             android:layout_height="250dp"
             android:contentDescription="@string/the_stratagrids_logo"
             app:srcCompat="@drawable/stratagridslogo"
-            tools:ignore="MissingConstraints"/>
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/textView"
@@ -41,11 +41,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="10dp">
 
             <EditText
                 android:id="@+id/email"
@@ -93,7 +88,6 @@
                 android:paddingEnd="0dp"
                 android:textStyle="bold"
                 tools:ignore="MissingConstraints"/>
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

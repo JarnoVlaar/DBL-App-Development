@@ -36,6 +36,8 @@ android {
 }
 
 val androidXLifecycleVersion = "2.7.0"
+val androidXAnnotationVersion = "1.7.1"
+val androidXCoreSplashscreenVersion = "1.0.1"
 
 dependencies {
 
@@ -44,10 +46,10 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.navigation:navigation-fragment:2.7.7")
     implementation("androidx.navigation:navigation-ui:2.7.7")
-    implementation("androidx.annotation:annotation:1.7.1")
+    implementation("androidx.annotation:annotation:$androidXAnnotationVersion")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$androidXLifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$androidXLifecycleVersion")
-    implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation("androidx.core:core-splashscreen:$androidXCoreSplashscreenVersion")
 
     // Import the Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:32.7.4"))

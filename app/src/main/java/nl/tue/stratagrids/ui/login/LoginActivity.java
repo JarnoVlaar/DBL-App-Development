@@ -114,9 +114,6 @@ private boolean basicInputValidation(String email, String password) {
 }
 private void displayError(@NonNull String errorCode) {
     switch (errorCode) {
-        default:
-            Toast.makeText(LoginActivity.this, R.string.generic_error, Toast.LENGTH_LONG).show();
-            break;
         case "ERROR_INVALID_CUSTOM_TOKEN":
             Toast.makeText(LoginActivity.this, R.string.ERROR_INVALID_CUSTOM_TOKEN, Toast.LENGTH_LONG).show();
             break;
@@ -185,6 +182,9 @@ private void displayError(@NonNull String errorCode) {
         case "ERROR_WEAK_PASSWORD":
             mPassword.setError(getResources().getString(R.string.ERROR_WEAK_PASSWORD));
             mPassword.requestFocus();
+            break;
+        default:
+            Toast.makeText(LoginActivity.this, R.string.generic_error, Toast.LENGTH_LONG).show();
             break;
     }
 }
