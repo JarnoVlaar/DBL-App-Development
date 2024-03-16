@@ -9,13 +9,15 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:gravity="center"
     tools:context=".ui.login.LoginActivity"
     android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:ignore="UseCompoundDrawables">
 
         <ImageView
             android:id="@+id/imageStrataLogo"
@@ -134,8 +136,9 @@
                     android:textSize="12sp"
                     android:layout_weight="1"
                     android:gravity="right"
+                    android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    tools:ignore="MissingConstraints"/>
+                    tools:ignore="MissingConstraints,RtlHardcoded"/>
 
                 <Button
                     android:id="@+id/registerNow"
@@ -149,12 +152,13 @@
                     android:layout_weight="1"
                     android:gravity="left"
                     android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/loginButton"
                     app:layout_constraintVertical_bias="0.0"
-                    tools:ignore="MissingConstraints"/>
+                    tools:ignore="MissingConstraints,RtlHardcoded"/>
             </LinearLayout>
         </LinearLayout>
 
