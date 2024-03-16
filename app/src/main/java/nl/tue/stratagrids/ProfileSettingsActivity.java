@@ -2,22 +2,17 @@ package nl.tue.stratagrids;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Html;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Objects;
 
@@ -62,27 +57,24 @@ public class ProfileSettingsActivity extends AppCompatActivity {
             db.collection("User Collection")
                 .whereEqualTo("UserID",user.getUid())
                 .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        Log.d(TAG, "Taak is uberhaupt uitgevoerd dat is kaolo lijp");
-                        if (task.isSuccessful()) {
-                            Log.d(TAG, "Taak is ook nog eens sucessvol volbracht, bravo");
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                                Long wins = document.getLong("Wins");
-                                Long ties = document.getLong("Ties");
-                                Long losses = document.getLong("Losses");
+                .addOnCompleteListener(task -> {
+                    Log.d(TAG, "Taak is uberhaupt uitgevoerd dat is kaolo lijp");
+                    if (task.isSuccessful()) {
+                        Log.d(TAG, "Taak is ook nog eens sucessvol volbracht, bravo");
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Log.d(TAG, document.getId() + " => " + document.getData());
+                            Long wins = document.getLong("Wins");
+                            Long ties = document.getLong("Ties");
+                            Long losses = document.getLong("Losses");
 
 
-                                // Now you have the username, you can use it as you want
-                                textStatsWins.setText(String.format(String.valueOf(wins)));
-                                textStatsTies.setText(String.format(String.valueOf(ties)));
-                                textStatsLoss.setText(String.format(String.valueOf(losses)));
-                            }
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
+                            // Now you have the username, you can use it as you want
+                            textStatsWins.setText(String.format(String.valueOf(wins)));
+                            textStatsTies.setText(String.format(String.valueOf(ties)));
+                            textStatsLoss.setText(String.format(String.valueOf(losses)));
                         }
+                    } else {
+                        Log.d(TAG, "Error getting documents: ", task.getException());
                     }
                 });
 
