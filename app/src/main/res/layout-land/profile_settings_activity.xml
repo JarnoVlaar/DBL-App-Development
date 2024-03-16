@@ -92,7 +92,7 @@
                     android:layout_marginBottom="1dp"
                     android:text="@string/StatisticsTitleText"
                     android:theme="@style/BoldText"
-                    android:textSize="20dp"/>
+                    android:textSize="20sp"/>
 
                 <TextView
                     android:id="@+id/StatisticsWins"
@@ -141,7 +141,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/ManagementTitleText"
                     android:theme="@style/BoldText"
-                    android:textSize="20dp"/>
+                    android:textSize="20sp"/>
 
                 <TextView
                     android:id="@+id/ManagementDescription"
