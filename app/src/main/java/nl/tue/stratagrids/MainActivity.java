@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import nl.tue.stratagrids.ui.login.LoginActivity;
 
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void setButtons() {
-        Button profileSettingsButton = findViewById(R.id.ProfileSettingsButton);
+        ImageButton profileSettingsButton = findViewById(R.id.ProfileSettingsButton);
         profileSettingsButton.setOnClickListener(view -> {
             if (fAuth.getCurrentUser() != null) {
                 Intent signUpIntent = new Intent(MainActivity.this, ProfileSettingsActivity.class);
