@@ -47,5 +47,24 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="TextTablet">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextTitleTablet">
+        <item name="android:textSize">48sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextSubTitleTablet">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextSubSubTitleTablet">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="Theme.StrataGrids" parent="Base.Theme.StrataGrids" />
 </resources>
