@@ -61,7 +61,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/offlineText"
-                android:theme="@style/BoldText" />
+                android:theme="@style/TextSubTitleTablet" />
 
             <ImageButton
                 android:contentDescription="@string/ButtonProfileActivityDescription"
@@ -98,13 +98,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/MatchmakingTitle"
-                    android:theme="@style/BoldText" />
+                    android:theme="@style/TextSubTitleTablet" />
 
                 <TextView
                     android:id="@+id/MatchmakingDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/MatchmakingDescription" />
+                    android:text="@string/MatchmakingDescription"
+                    android:theme="@style/TextTablet"/>
 
                 <LinearLayout
                     android:id="@+id/MatchmakingButtons"
@@ -118,7 +119,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/LocalGameButtonText"
-                        android:theme="@style/ButtonWhite"
+                        android:theme="@style/ButtonWhiteTablet"
                         app:cornerRadius="6dp" />
 
 
@@ -127,7 +128,7 @@
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:text="@string/MatchmakingButtonText"
-                        android:theme="@style/ButtonWhite"
+                        android:theme="@style/ButtonWhiteTablet"
                         app:cornerRadius="6dp" />
 
 
@@ -137,7 +138,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/MatchcodeButtonText"
-                        android:theme="@style/ButtonWhite"
+                        android:theme="@style/ButtonWhiteTablet"
                         app:cornerRadius="6dp" />
 
                 </LinearLayout>
