@@ -83,4 +83,15 @@
     <string name="example_email_com">example@email.com</string>
     <string name="generic_error">An error has occurred.</string>
     <string name="action_settings">Settings</string>
+
+    <!--Rules strings-->
+    <string name="RulesTitle"><u>Rules of Statagrids</u></string>
+    <string name="SetupTitle">Set up</string>
+    <string name="SetupDescription">The game consists of dots and lines. When the game starts, a board with only dots will appear. The player who accepts the match can make the first move.</string>
+    <string name="PlayingTitle">Making a move</string>
+    <string name="PlayingDescription"> One move consists of selecting a dot and dragging a line to another dot. Each line belongs to a player and has the color of that player.</string>
+    <string name="ScoringTitle">Scores</string>
+    <string name="ScoringDescription">When a 1x1 square is formed on the board, the last player to add a line to that square receives a point and can make another move. The player with the highest score at the end of the game wins the match.</string>
+    <string name="RulesButtonContentDescription">Button to create the rules popup window</string>
+    <string name="ButtonProfileActivityDescription">Button to go to the profile settings activity</string>
 </resources>
