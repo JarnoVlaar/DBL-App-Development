@@ -42,6 +42,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageButton
+                android:contentDescription="@string/RulesButtonContentDescription"
                 android:id="@+id/RulesButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
@@ -64,6 +65,7 @@
                 android:theme="@style/BoldText"/>
 
             <ImageButton
+                android:contentDescription="@string/ButtonProfileActivityDescription"
                 android:id="@+id/ProfileSettingsButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
@@ -101,40 +103,32 @@
 
             <LinearLayout
                 android:id="@+id/MatchmakingButtons"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <Button
-                android:id="@+id/LocalGameButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/LocalGameButtonText"
-                android:theme="@style/ButtonWhite"
-                app:cornerRadius="6dp" />
-
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1"/>
+                    android:id="@+id/LocalGameButton"
+                    android:layout_width="116dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/LocalGameButtonText"
+                    android:theme="@style/ButtonWhite"
+                    app:cornerRadius="6dp"
+                    android:layout_marginEnd="10dp"/>
 
                 <Button
                     android:id="@+id/MatchmakingButton"
-                    android:layout_width="wrap_content"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:text="@string/MatchmakingButtonText"
                     android:theme="@style/ButtonWhite"
-                    app:cornerRadius="6dp" />
-
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1"/>
+                    app:cornerRadius="6dp"
+                    android:layout_marginEnd="10dp"/>
 
                 <Button
                     android:id="@+id/MatchcodeButton"
-                    android:layout_width="wrap_content"
+                    android:layout_width="116dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/MatchcodeButtonText"
