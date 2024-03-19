@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "351883315476",
+    "project_id": "stratagrids-appdev10",
+    "storage_bucket": "stratagrids-appdev10.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:351883315476:android:60831b3d7a8d3ea2c21a01",
+        "android_client_info": {
+          "package_name": "nl.tue.stratagrids"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpy_2beQVAHW66z6s8KYlEqR_eUTwJTOY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
