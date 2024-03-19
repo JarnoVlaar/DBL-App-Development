@@ -54,6 +54,13 @@ public class MainActivity extends AppCompatActivity {
 
         Button loginButton = findViewById(R.id.LoginButton);
         loginButton.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, LoginActivity.class)));
+
+        Button localGameButton = findViewById(R.id.LocalGameButton);
+        localGameButton.setOnClickListener(view -> {
+            Intent signUpIntent = new Intent(MainActivity.this, GameActivity.class);
+            signUpIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(signUpIntent);
+        });
     }
 
     /**
