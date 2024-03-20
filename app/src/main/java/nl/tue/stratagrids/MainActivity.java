@@ -1,18 +1,34 @@
 package nl.tue.stratagrids;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.Manifest;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import nl.tue.stratagrids.ui.login.LoginActivity;
 
+import android.util.Log;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.GeoPoint;
+
 import android.widget.Button;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
@@ -54,6 +70,70 @@ public class MainActivity extends AppCompatActivity {
 
         Button loginButton = findViewById(R.id.LoginButton);
         loginButton.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, LoginActivity.class)));
+
+        Button matchmakingButton = findViewById(R.id.MatchmakingButton);
+        matchmakingButton.setOnClickListener(view -> {
+            //TODO: fix making a dedicated handler and decompose into smaller functions
+            if (fAuth.getCurrentUser() != null) {
+                // Get an instance of Firestore
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+                // Get the unique ID of the current user
+                String userId = fAuth.getCurrentUser().getUid();
+
+                // Get the current time
+                long timestamp = System.currentTimeMillis();
+
+                // Get the user's location
+                LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                while (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    // Request the permission if it's not granted yet
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+                    //log that it's not granted yet
+                    Log.d("Location", "Location permission not granted yet");
+                }
+                Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+                GeoPoint geoPoint = new GeoPoint(0.0, 0.0);
+                if (location != null) {
+
+                    geoPoint = new GeoPoint(location.getLatitude(), location.getLongitude());
+
+                    //log succesful acess to location
+                    Log.d("Location", "Location accessed successfully");
+                } else {
+                    Log.d("Location", "Location not accessed successfully");
+                }
+
+
+                // Create a new user with a first and last name
+                Map<String, Object> user = new HashMap<>();
+                user.put("time", timestamp);
+                user.put("location", geoPoint);
+
+                // Add a new document with a generated ID
+                db.collection("matchmaking").document(userId)
+                        .set(user)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                String TAG = "MainActivity";
+                                Log.d(TAG, "DocumentSnapshot added with ID: " + userId);
+                                Toast.makeText(MainActivity.this, "Started matchmaking...", Toast.LENGTH_SHORT).show();
+
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                String TAG = "MainActivity";
+                                Log.w(TAG, "Error adding document", e);
+                                Toast.makeText(MainActivity.this, "Matchmaking failed", Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+            }
+        });
     }
 
     /**
