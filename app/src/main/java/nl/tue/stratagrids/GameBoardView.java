@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
 
 
 public class GameBoardView extends View {
@@ -23,12 +24,13 @@ public class GameBoardView extends View {
     private static final int NO_PLAYER_COLOR = 0xFFEAF2FF;
     private static final int STROKE_COLOR = 0xFF494A50;
 
-    private Paint playerPaints[];
+    private Paint[] playerPaints;
     private Paint strokePaint;
 
     private Game game;
 
-    private float xDown, yDown;
+    private float xDown;
+    private float yDown;
 
     public GameBoardView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -94,7 +96,7 @@ public class GameBoardView extends View {
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw(@NonNull Canvas canvas) {
         super.onDraw(canvas);
 
         strokePaint.setStrokeWidth(DOT_STROKE_WIDTH * getScaleFactor());
