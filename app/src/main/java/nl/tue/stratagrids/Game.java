@@ -1,25 +1,23 @@
 package nl.tue.stratagrids;
 
-import android.graphics.Path;
-
 import java.util.HashMap;
+import java.util.Map;
 
-/*
+/**
  * Game class that will be used to play the game, handles the game state and the game logic
- *
  */
 public class Game {
 
-    private int[][] verticalLines;
-    private int[][] horizontalLines;
-    private int[][] capturedBlocks;
+    private final int[][] verticalLines;
+    private final int[][] horizontalLines;
+    private final int[][] capturedBlocks;
 
     private final int size;
     private final int players;
     private int currentPlayer;
 
 
-    /*
+    /**
      * Game constructor for an existing game
      * @param verticalLines representing the vertical lines as a 2D array
      * @param horizontalLines representing the horizontal lines as a 2D array
@@ -37,7 +35,7 @@ public class Game {
         this.players = players;
     }
 
-    /*
+    /**
      * Game constructor for a new game
      * @param size of the board measured in dots
      * @param players representing the number of players in the game
@@ -51,20 +49,32 @@ public class Game {
         this.currentPlayer = 1;
     }
 
+    /**
+     * Getter for the vertical lines of the board
+     * @return the vertical lines of the board
+     */
     public int[][] getVerticalLines() {
         return verticalLines;
     }
 
+    /**
+     * Getter for the horizontal lines of the board
+     * @return the horizontal lines of the board
+     */
     public int[][] getHorizontalLines() {
         return horizontalLines;
     }
 
+    /**
+     * Getter for the captured blocks of the board
+     * @return the captured blocks of the board
+     */
     public int[][] getCapturedBlocks() {
         return capturedBlocks;
     }
 
-    /*
-     * Function to get the size of the board
+    /**
+     * Getter for the size of the board
      * @return the size of the board
      */
     public int getSize() {
@@ -72,8 +82,8 @@ public class Game {
     }
 
 
-    /*
-     * Function to make a move in the game, checks if a block is captured and updates the scores, checks if the current player gets another turn
+    /**
+     * Logic for making a move in the game, checks if a block is captured and updates the scores, checks if the current player gets another turn
      * @param x coordinate of the line
      * @param y coordinate of the line
      * @param alignment of the line where 1 is vertical, 2 is horizontal
@@ -85,8 +95,7 @@ public class Game {
      * returns true if the move was successful
      */
     public boolean makeMove(int x, int y, int alignment) {
-
-        // update the old scores
+        // Save the scores before the move
         HashMap<Integer,Integer> oldScores = checkScore();
 
         // alignment where 1 is vertical, 2 is horizontal
@@ -123,7 +132,7 @@ public class Game {
         HashMap<Integer,Integer> newScores = checkScore();
 
         // check if the score of the current player has increased
-        if (newScores.get(currentPlayer) > oldScores.get(currentPlayer)) {
+        if (newScores.getOrDefault(currentPlayer, 0) > oldScores.getOrDefault(currentPlayer, 0)) {
             // if the score has increased, the player gets another turn
         } else {
             // if the score has not increased, the next player gets a turn
@@ -134,7 +143,7 @@ public class Game {
     }
 
 
-    /*
+    /**
      * Function to check if a block is captured, also checks neighbouring blocks
      * @param x coordinate of the block
      * @param y coordinate of the block
@@ -147,20 +156,17 @@ public class Game {
         }
 
         // check if a block is captured
-        if (verticalLines[x][y] != 0 && verticalLines[x+1][y] != 0 && horizontalLines[x][y] != 0 && horizontalLines[x][y+1] != 0) {
-            if (capturedBlocks[x][y] == 0) {
-                capturedBlocks[x][y] = currentPlayer;
-            }
+        if (verticalLines[x][y] != 0 && verticalLines[x+1][y] != 0 && horizontalLines[x][y] != 0 && horizontalLines[x][y+1] != 0 && capturedBlocks[x][y] == 0) {
+            capturedBlocks[x][y] = currentPlayer;
         }
     }
 
-    /*
+    /**
      * Function to check the scores of the players
      * @return a HashMap with the scores of the players
      */
-    private HashMap<Integer, Integer>  checkScore() {
-
-        HashMap<Integer, Integer> checkedScores = new HashMap<Integer, Integer>();
+    private HashMap<Integer, Integer> checkScore() {
+        HashMap<Integer, Integer> checkedScores = new HashMap<>();
 
         //initialize scores at 0 for each player
         for (int i = 1; i <= players; i++) {
@@ -171,7 +177,7 @@ public class Game {
         for (int i = 0; i < size-1; i++) {
             for (int j = 0; j < size-1; j++) {
                 if (capturedBlocks[i][j] != 0) {
-                    checkedScores.put(capturedBlocks[i][j], checkedScores.get(capturedBlocks[i][j]) + 1);
+                    checkedScores.put(capturedBlocks[i][j], checkedScores.getOrDefault(capturedBlocks[i][j], 0) + 1);
                 }
             }
         }
@@ -179,7 +185,7 @@ public class Game {
         return checkedScores;
     }
 
-    /*
+    /**
      * Function to switch the current player to the next player
      * @modifies currentPlayer to be the next player
      */
@@ -191,19 +197,19 @@ public class Game {
         }
     }
 
-    /*
-     * Function to get the current player of the game
+    /**
+     * Getter for the current player of the game
      * @return the current player
      */
     public int getCurrentPlayer() {
         return currentPlayer;
     }
 
-    /*
+    /**
      * Function to get the scores of the players
      * @return a HashMap with the scores of the players
      */
-    public HashMap<Integer,Integer> getScores() {
+    public Map<Integer,Integer> getScores() {
         return checkScore();
     }
 }
