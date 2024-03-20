@@ -92,7 +92,7 @@ public class Game {
      * @modifies the capturedBlocks array
      * @modifies the currentPlayer
      * @modifies the scores
-     * returns true if the move was successful
+     * @return true if the move was successful
      */
     public boolean makeMove(int x, int y, int alignment) {
         // Save the scores before the move
