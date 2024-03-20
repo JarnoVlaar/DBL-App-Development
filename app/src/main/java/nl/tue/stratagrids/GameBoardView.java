@@ -77,19 +77,19 @@ public class GameBoardView extends View {
     }
 
     public int getColumnFromX(float x) {
-        return (int) ((x - DOT_RADIUS * getScaleFactor() + DOT_SPACING / 2 * getScaleFactor()) / (DOT_SPACING * getScaleFactor()));
+        return (int) ((x - DOT_RADIUS * getScaleFactor() + DOT_SPACING / 2.0f * getScaleFactor()) / (DOT_SPACING * getScaleFactor()));
     }
 
     public int getRowFromY(float y) {
-        return (int) ((y - DOT_RADIUS * getScaleFactor() - getStartY() + DOT_SPACING / 2 * getScaleFactor()) / (DOT_SPACING * getScaleFactor()));
+        return (int) ((y - DOT_RADIUS * getScaleFactor() - getStartY() + DOT_SPACING / 2.0f * getScaleFactor()) / (DOT_SPACING * getScaleFactor()));
     }
 
     public Point getInsideDot(int pointX, int pointY) {
         int column = getColumnFromX(pointX);
         int row = getRowFromY(pointY);
-        int centerX = getXFromColumn(column);
-        int centerY = getYFromRow(row);
-        if (Math.sqrt(Math.pow(pointX -centerX, 2) + Math.pow(pointY - centerY , 2)) < DOT_RADIUS * 2 * getScaleFactor()) {
+        double centerX = getXFromColumn(column);
+        double centerY = getYFromRow(row);
+        if (Math.sqrt(Math.pow(pointX - centerX, 2) + Math.pow(pointY - centerY , 2)) < DOT_RADIUS * 2.0f * getScaleFactor()) {
             return new Point(column, row);
         }
         return null;
