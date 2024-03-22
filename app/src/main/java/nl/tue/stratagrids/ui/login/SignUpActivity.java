@@ -16,7 +16,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import nl.tue.stratagrids.MainActivity;
@@ -35,7 +38,9 @@ public class SignUpActivity extends AppCompatActivity{
     Button mBackButton;
 
     CheckBox mTermsBox;
+
     FirebaseAuth fAuth;
+    FirebaseFirestore db;
 
     private static final String TAG = "SignUpActivity";
 
@@ -56,6 +61,8 @@ public class SignUpActivity extends AppCompatActivity{
         mTermsBox = findViewById(R.id.CheckBox);
 
         fAuth = FirebaseAuth.getInstance();
+
+        db = FirebaseFirestore.getInstance();
 
         addButtonListeners();
     }
@@ -80,20 +87,7 @@ private void addButtonListeners() {
                 Toast.makeText(SignUpActivity.this, "Logged in", Toast.LENGTH_LONG).show();
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
 
-                // Add username to user
-                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                        .setDisplayName(username)
-                        //.setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
-                        .build();
-
-                FirebaseUser user = fAuth.getCurrentUser();
-
-                Objects.requireNonNull(user).updateProfile(profileUpdates)
-                        .addOnCompleteListener(task1 -> {
-                            if (task1.isSuccessful()) {
-                                Log.d(TAG, "User profile updated.");
-                            }
-                        });
+                updateUserProfile(username);
 
                 // Finish this and all other activities
                 finish();
@@ -113,6 +107,36 @@ private void addButtonListeners() {
 
     // Back button functionality
     mBackButton.setOnClickListener(view -> finish());
+}
+
+private void updateUserProfile(String username) {
+    // Add username to user in Fireauth
+    FirebaseUser user = fAuth.getCurrentUser();
+
+    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+            .setDisplayName(username)
+            //.setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
+            .build();
+
+    Objects.requireNonNull(user).updateProfile(profileUpdates)
+            .addOnCompleteListener(task1 -> {
+                if (task1.isSuccessful()) {
+                    Log.d(TAG, "User profile updated.");
+                }
+            });
+
+    // Add entries to database
+    Map<String, Object> userObject = new HashMap<>();
+    userObject.put("Username", username);
+    userObject.put("UserID", user.getUid());
+    userObject.put("Wins", 0);
+    userObject.put("Ties", 0);
+    userObject.put("Losses", 0);
+
+    db.collection("User Collection").document(user.getUid())
+            .set(userObject)
+            .addOnSuccessListener(aVoid -> Log.d(TAG, "New userdata successfully written!"))
+            .addOnFailureListener(e -> Log.w(TAG, "Error writing userdata", e));
 }
 
     private boolean basicInputValidation(String username, String email, String password, String confirmPassword) {

@@ -64,10 +64,10 @@
     <string name="ManagmentDescriptionText">You are in control of your account</string>
     <string name="ManagementTitleText">Management</string>
     <string name="ProfilePictureDescription">Profile picture of the user</string>
-    <string name="NumberOfMatchesLostText">Number of matches lost:</string>
-    <string name="NumberOfTiesText">Number of matches tied:</string>
-    <string name="StatisticsTitleText">Statistics</string>
     <string name="NumberOfWinsText">Number of matches won:</string>
+    <string name="NumberOfTiesText">Number of matches tied:</string>
+    <string name="NumberOfLossesText">Number of matches lost:</string>
+    <string name="StatisticsTitleText">Statistics</string>
     <string name="LogoutButtonText">Logout</string>
     <string name="LoginButtonText">Login</string>
     <string name="DeleteAccountButtonText">Delete Account</string>
@@ -83,4 +83,5 @@
     <string name="example_email_com">example@email.com</string>
     <string name="generic_error">An error has occurred.</string>
     <string name="action_settings">Settings</string>
+    <string name="number_zero">0</string>
 </resources>
