@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
         Button loginButton = findViewById(R.id.LoginButton);
         loginButton.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, LoginActivity.class)));
 
-        ScreenSizesOverview
         ImageButton rulesButton = findViewById(R.id.RulesButton);
         rulesButton.setOnClickListener(this::onButtonShowRulesPopupWindowClick);
 
