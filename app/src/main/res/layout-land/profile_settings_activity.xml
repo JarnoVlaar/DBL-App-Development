@@ -104,7 +104,7 @@
                     android:id="@+id/StatisticsLoss"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/NumberOfMatchesLostText" />
+                    android:text="@string/NumberOfLossesText" />
 
                 <TextView
                     android:id="@+id/StatisticsTies"

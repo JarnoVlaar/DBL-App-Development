@@ -83,7 +83,7 @@
         android:id="@+id/StatisticsLoss"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/NumberOfMatchesLostText"
+        android:text="@string/NumberOfLossesText"
         android:theme="@style/TextTablet"
         app:layout_constraintBottom_toTopOf="@+id/StatisticsTies"
         app:layout_constraintEnd_toEndOf="parent"
