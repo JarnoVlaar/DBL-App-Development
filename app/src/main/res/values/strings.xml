@@ -64,10 +64,10 @@
     <string name="ManagmentDescriptionText">You are in control of your account</string>
     <string name="ManagementTitleText">Management</string>
     <string name="ProfilePictureDescription">Profile picture of the user</string>
-    <string name="NumberOfMatchesLostText">Number of matches lost:</string>
-    <string name="NumberOfTiesText">Number of matches tied:</string>
-    <string name="StatisticsTitleText">Statistics</string>
     <string name="NumberOfWinsText">Number of matches won:</string>
+    <string name="NumberOfTiesText">Number of matches tied:</string>
+    <string name="NumberOfLossesText">Number of matches lost:</string>
+    <string name="StatisticsTitleText">Statistics</string>
     <string name="LogoutButtonText">Logout</string>
     <string name="LoginButtonText">Login</string>
     <string name="DeleteAccountButtonText">Delete Account</string>
@@ -94,4 +94,6 @@
     <string name="ScoringDescription">When a 1x1 square is formed on the board, the last player to add a line to that square receives a point and can make another move. The player with the highest score at the end of the game wins the match.</string>
     <string name="RulesButtonContentDescription">Button to create the rules popup window</string>
     <string name="ButtonProfileActivityDescription">Button to go to the profile settings activity</string>
+
+    <string name="number_zero">0</string>
 </resources>

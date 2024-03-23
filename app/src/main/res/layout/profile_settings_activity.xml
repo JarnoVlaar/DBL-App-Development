@@ -17,7 +17,8 @@
         android:theme="@style/ButtonIcon"
         app:layout_constraintBottom_toTopOf="@+id/ProfilePicture"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlHardcoded" />
 
     <TextView
         android:id="@+id/textAccount"
@@ -71,37 +72,85 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/UsernameText" />
 
+
     <TextView
         android:id="@+id/StatisticsWins"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/NumberOfWinsText"
         app:layout_constraintBottom_toTopOf="@+id/StatisticsLoss"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/StatisticsTitle" />
 
+
     <TextView
         android:id="@+id/StatisticsLoss"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/NumberOfMatchesLostText"
+        android:text="@string/NumberOfLossesText"
         app:layout_constraintBottom_toTopOf="@+id/StatisticsTies"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/StatisticsWins" />
 
+
     <TextView
         android:id="@+id/StatisticsTies"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="27dp"
         android:text="@string/NumberOfTiesText"
         app:layout_constraintBottom_toTopOf="@+id/ManagementTitle"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/StatisticsLoss" />
 
+
+    <TextView
+        android:id="@+id/StatisticsWinsNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="@string/number_zero"
+        android:textColor="@color/greenMedium"
+
+        app:layout_constraintBottom_toBottomOf="@+id/StatisticsWins"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintStart_toEndOf="@+id/StatisticsWins"
+        app:layout_constraintTop_toTopOf="@+id/StatisticsWins"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/StatisticsLossNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/number_zero"
+        android:textColor="@color/redDark"
+
+        app:layout_constraintBottom_toTopOf="@+id/StatisticsTiesNumber"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/StatisticsWinsNumber"
+        app:layout_constraintTop_toBottomOf="@+id/StatisticsWinsNumber" />
+
+    <TextView
+        android:id="@+id/StatisticsTiesNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/number_zero"
+        android:textColor="@color/orangeMedium"
+        app:layout_constraintBottom_toBottomOf="@+id/StatisticsTies"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/StatisticsLossNumber"
+        app:layout_constraintTop_toBottomOf="@+id/StatisticsLoss"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/ManagementTitle"
