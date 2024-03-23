@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Common -->
+    <string name="score_indicator_left">0</string>
+    <string name="score_indicator_right">0</string>
+    <string name="score_indicator_separator">-</string>
+
+    <!-- Online Game -->
+    <string name="online_your_turn">Your turn!</string>
+    <string name="online_opponents_turn">Opponents\' turn!</string>
+    <string name="online_surrender">Surrender</string>
+    <string name="online_your_turn_description">Draw a line between two dots.</string>
+    <string name="online_opponents_turn_description">Waiting for the opponent to draw a line.</string>
+    <string name="online_you_won">You won!</string>
+    <string name="online_you_lost">You lost!</string>
+    <string name="online_you_surrendered">You surrendered!</string>
+    <string name="online_opponent_surrendered">Opponent surrendered!</string>
+    <string name="online_draw">Draw!</string>
+
+    <!-- Local Game -->
+    <string name="local_p1_surrendered">Player 1 surrendered!</string>
+    <string name="local_p2_surrendered">Player 2 surrendered!</string>
+    <string name="local_p1_turn">Player 1\'s turn!</string>
+    <string name="local_p2_turn">Player 2\'s turn!</string>
+    <string name="local_turn_description">Draw a line between two dots.</string>
+    <string name="local_p1_won">Player 1 won!</string>
+    <string name="local_p2_won">Player 2 won!</string>
+    <string name="local_draw">Draw!</string>
+</resources>

@@ -64,6 +64,13 @@ public class MainActivity extends AppCompatActivity {
 
         ImageButton rulesButton = findViewById(R.id.RulesButton);
         rulesButton.setOnClickListener(this::onButtonShowRulesPopupWindowClick);
+
+        Button localGameButton = findViewById(R.id.LocalGameButton);
+        localGameButton.setOnClickListener(view -> {
+            Intent signUpIntent = new Intent(MainActivity.this, GameActivity.class);
+            signUpIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(signUpIntent);
+        });
     }
 
     /**
