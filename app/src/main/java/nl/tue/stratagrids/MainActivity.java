@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 String userId = fAuth.getCurrentUser().getUid();
 
                 // Get the current time
-                long timestamp = System.currentTimeMillis();
+                long timestamp = System.currentTimeMillis() / 1000;
 
                 // Get the user's location
                 LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -94,10 +94,12 @@ public class MainActivity extends AppCompatActivity {
                 }
                 Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
-                GeoPoint geoPoint = new GeoPoint(0.0, 0.0);
+                double latitude = 0;
+                double longitude = 0;
                 if (location != null) {
 
-                    geoPoint = new GeoPoint(location.getLatitude(), location.getLongitude());
+                    latitude = location.getLatitude();
+                    longitude = location.getLongitude();
 
                     //log succesful acess to location
                     Log.d("Location", "Location accessed successfully");
@@ -109,7 +111,8 @@ public class MainActivity extends AppCompatActivity {
                 // Create a new user with a first and last name
                 Map<String, Object> user = new HashMap<>();
                 user.put("time", timestamp);
-                user.put("location", geoPoint);
+                user.put("latitude", latitude);
+                user.put("longitude", longitude);
 
                 // Add a new document with a generated ID
                 db.collection("matchmaking").document(userId)
