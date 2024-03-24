@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:padding="24dp">
 
-    <nl.tue.stratagrids.GameBoardView
+    <nl.tue.stratagrids.ui.game.GameBoardView
         android:id="@+id/gameBoard"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/gameBoard"
         android:fontFamily="sans-serif-black"
-        android:text="@string/local_p1_turn"
+        android:text="@string/online_your_turn"
         android:textColor="#1E1E1E"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="sans-serif"
-        android:text="@string/local_turn_description"
+        android:text="@string/online_your_turn_description"
         android:textColor="#71727A"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"

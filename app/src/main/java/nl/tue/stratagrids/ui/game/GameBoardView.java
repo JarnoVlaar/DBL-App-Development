@@ -1,4 +1,4 @@
-package nl.tue.stratagrids;
+package nl.tue.stratagrids.ui.game;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -7,10 +7,10 @@ import android.graphics.Point;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
+import nl.tue.stratagrids.AbstractGame;
 
 public class GameBoardView extends View {
     private static final int DOT_RADIUS = 12;
@@ -24,20 +24,23 @@ public class GameBoardView extends View {
     private static final int NO_PLAYER_COLOR = 0xFFEAF2FF;
     private static final int STROKE_COLOR = 0xFF494A50;
 
-    private Paint[] playerPaints;
-    private Paint strokePaint;
-
-    private Game game;
+    private final Paint[] playerPaints;
+    private final Paint strokePaint;
 
     private float xDown;
     private float yDown;
 
-    public GameBoardView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init();
+    @Nullable
+    private AbstractGame game;
+
+    public void updateGameWith(AbstractGame game) {
+        this.game = game;
+        invalidate();
     }
 
-    private void init() {
+    public GameBoardView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+
         playerPaints = new Paint[3];
         for (int i = 0; i < 3; i++) {
             playerPaints[i] = new Paint();
@@ -52,8 +55,6 @@ public class GameBoardView extends View {
         strokePaint.setColor(STROKE_COLOR);
         strokePaint.setStyle(Paint.Style.STROKE);
         strokePaint.setAntiAlias(true);
-
-        game = new Game(5, 2);
     }
 
     public int getUnscaledWidth() {
@@ -98,6 +99,10 @@ public class GameBoardView extends View {
     @Override
     protected void onDraw(@NonNull Canvas canvas) {
         super.onDraw(canvas);
+
+        if (game == null) {
+            return;
+        }
 
         strokePaint.setStrokeWidth(DOT_STROKE_WIDTH * getScaleFactor());
 
@@ -163,6 +168,10 @@ public class GameBoardView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if (game == null) {
+            return false;
+        }
+
         float x = event.getX();
         float y = event.getY();
 
@@ -181,21 +190,11 @@ public class GameBoardView extends View {
                         // Horizontal line
                         if (game.makeMove(Math.min(startDot.x, endDot.x), Math.min(startDot.y, endDot.y), 1)) {
                             invalidate();
-                            ViewGroup superView = (ViewGroup) getParent();
-                            TextView score1 = (TextView) superView.findViewById(R.id.tvPlayer1Score);
-                            TextView score2 = (TextView) superView.findViewById(R.id.tvPlayer2Score);
-                            score1.setText(String.valueOf(game.getScores().getOrDefault(1, 0)));
-                            score2.setText(String.valueOf(game.getScores().getOrDefault(2, 0)));
                         }
                     } else if (startDot.y == endDot.y && Math.abs(startDot.x - endDot.x) == 1) {
                         // Vertical line
                         if (game.makeMove(Math.min(startDot.x, endDot.x), Math.min(startDot.y, endDot.y), 2)) {
                             invalidate();
-                            ViewGroup superView = (ViewGroup) getParent();
-                            TextView score1 = (TextView) superView.findViewById(R.id.tvPlayer1Score);
-                            TextView score2 = (TextView) superView.findViewById(R.id.tvPlayer2Score);
-                            score1.setText(String.valueOf(game.getScores().getOrDefault(1, 0)));
-                            score2.setText(String.valueOf(game.getScores().getOrDefault(2, 0)));
                         }
                     }
                 }
