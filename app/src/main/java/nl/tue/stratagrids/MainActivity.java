@@ -27,6 +27,7 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -41,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
+
+
+
         setButtons();
 
         fAuth = FirebaseAuth.getInstance();
@@ -53,6 +57,23 @@ public class MainActivity extends AppCompatActivity {
         } else {
             switchIncludeLayout(false);
         }
+
+        // fetch the games that the current user is involved in
+        // and display them in the UI
+        // this is done by querying the Firestore database
+        //with your player id there is an array that contains all the games you are in
+
+        ArrayList<String> gameIdentifiers = new ArrayList<>();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        if (fAuth.getCurrentUser() != null) {
+            db.collection("players").document(fAuth.getCurrentUser().getUid()).get().addOnSuccessListener(documentSnapshot -> {
+                if (documentSnapshot.exists()) {
+                    gameIdentifiers.addAll((ArrayList<String>) documentSnapshot.get("games"));
+                    Log.d("MainActivity", "Games: " + gameIdentifiers);
+                }
+            });
+        }
+
     }
 
     void setButtons() {
