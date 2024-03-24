@@ -96,4 +96,9 @@
     <string name="ButtonProfileActivityDescription">Button to go to the profile settings activity</string>
 
     <string name="number_zero">0</string>
+    <string name="send_email">Send Email</string>
+    <string name="reset_password_explanation">Enter the email associated with your account and we will send a link to recover your password.</string>
+    <string name="forgot_password_no_worries">No worries, reset your password here.</string>
+    <string name="lost_something">Lost something?</string>
+    <string name="mail_sent">Mail sent!</string>
 </resources>

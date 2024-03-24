@@ -33,6 +33,11 @@
             android:theme="@style/Theme.StrataGrids">
         </activity>
         <activity
+            android:name=".ui.login.ForgotPasswordActivity"
+            android:exported="false"
+            android:theme="@style/Theme.StrataGrids">
+        </activity>
+        <activity
             android:name=".ProfileSettingsActivity"
             android:exported="false"
             android:theme="@style/Theme.StrataGrids">

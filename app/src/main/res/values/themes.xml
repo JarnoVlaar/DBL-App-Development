@@ -8,10 +8,10 @@
     <style name="ButtonWhite">
         <item name="colorAccent">@android:color/white</item>
         <item name="colorPrimary">@android:color/white</item>
-        <item name="strokeColor">@color/dark_blue</item>
+        <item name="strokeColor">@color/blue</item>
         <item name="strokeWidth">2dp</item>
-        <item name="android:textColor">@color/dark_blue</item>
-        <item name="colorOnPrimary">@color/dark_blue</item>
+        <item name="android:textColor">@color/blue</item>
+        <item name="colorOnPrimary">@color/blue</item>
         <item name="android:insetLeft">4dp</item>
         <item name="android:padding">10dp</item>
     </style>
@@ -19,10 +19,10 @@
     <style name="ButtonWhiteTablet">
         <item name="colorAccent">@android:color/white</item>
         <item name="colorPrimary">@android:color/white</item>
-        <item name="strokeColor">@color/dark_blue</item>
+        <item name="strokeColor">@color/blue</item>
         <item name="strokeWidth">2dp</item>
-        <item name="android:textColor">@color/dark_blue</item>
-        <item name="colorOnPrimary">@color/dark_blue</item>
+        <item name="android:textColor">@color/blue</item>
+        <item name="colorOnPrimary">@color/blue</item>
         <item name="android:insetLeft">4dp</item>
         <item name="android:padding">10dp</item>
         <item name="android:textSize">20sp</item>
