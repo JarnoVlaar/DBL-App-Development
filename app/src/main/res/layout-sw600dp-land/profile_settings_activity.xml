@@ -1,0 +1,243 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <Button
+                android:id="@+id/ProfileSettingsBackButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:contentDescription="@string/ProfileSettingsBackButtonText"
+                android:drawableLeft="@drawable/arrow_back_ios_24px"
+                android:theme="@style/ButtonIcon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/textAccount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/account_text"
+                android:theme="@style/TextTitleTablet"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ProfilePicture"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center_horizontal"
+                android:contentDescription="@string/ProfilePictureDescription"
+                android:scaleType="center"
+                android:scaleX="5"
+                android:scaleY="5"
+                app:srcCompat="@drawable/account_circle_24px"
+                app:layout_constraintTop_toBottomOf="@id/textAccount"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/UsernameText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/UsernameText"
+                android:theme="@style/TextSubTitleTablet"
+                tools:layout_editor_absoluteX="152dp"
+                tools:layout_editor_absoluteY="172dp"
+                app:layout_constraintTop_toBottomOf="@id/ProfilePicture"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/StatisticsTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/StatisticsTitleText"
+                    android:theme="@style/TextSubTitleTablet"
+
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"/>
+
+                <TextView
+                    android:id="@+id/StatisticsWins"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/NumberOfWinsText"
+                    android:theme="@style/TextTablet"
+
+                    app:layout_constraintTop_toBottomOf="@id/StatisticsTitle"
+                    app:layout_constraintLeft_toLeftOf="parent" />
+
+                <TextView
+                    android:id="@+id/StatisticsLoss"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/NumberOfLossesText"
+                    android:theme="@style/TextTablet"
+
+                    app:layout_constraintTop_toBottomOf="@id/StatisticsWins"
+                    app:layout_constraintLeft_toLeftOf="parent" />
+
+                <TextView
+                    android:id="@+id/StatisticsTies"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/NumberOfTiesText"
+                    android:theme="@style/TextTablet"
+
+                    app:layout_constraintTop_toBottomOf="@id/StatisticsLoss"
+                    app:layout_constraintLeft_toLeftOf="parent"/>
+
+                <TextView
+                    android:id="@+id/StatisticsWinsNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/number_zero"
+                    android:theme="@style/TextTablet"
+                    android:textColor="@color/greenMedium"
+
+                    app:layout_constraintBottom_toBottomOf="@+id/StatisticsWins"
+                    app:layout_constraintStart_toStartOf="@+id/StatisticsTiesNumber"
+                    app:layout_constraintEnd_toEndOf="@id/StatisticsTiesNumber"
+                    app:layout_constraintTop_toTopOf="@+id/StatisticsWins"
+                    app:flow_horizontalBias="0.03"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/StatisticsLossNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/number_zero"
+                    android:theme="@style/TextTablet"
+                    android:textColor="@color/redDark"
+
+                    app:layout_constraintBottom_toTopOf="@+id/StatisticsTiesNumber"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.03"
+                    app:layout_constraintStart_toEndOf="@+id/StatisticsLoss"
+                    app:layout_constraintTop_toBottomOf="@+id/StatisticsWinsNumber" />
+
+                <TextView
+                    android:id="@+id/StatisticsTiesNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/number_zero"
+                    android:theme="@style/TextTablet"
+                    android:textColor="@color/orangeMedium"
+
+                    app:layout_constraintBottom_toBottomOf="@+id/StatisticsTies"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/StatisticsLossNumber"
+                    app:layout_constraintTop_toBottomOf="@+id/StatisticsLoss"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <Button
+                    android:id="@+id/LogoutButton"
+                    android:layout_width="300dp"
+                    android:layout_height="60dp"
+                    android:text="@string/LogoutButtonText"
+                    android:theme="@style/ButtonBlueTablet"
+
+                    app:layout_constraintTop_toBottomOf="@id/StatisticsTies"
+                    app:layout_constraintLeft_toLeftOf="parent"/>
+
+                <Button
+                    android:id="@+id/DeleteAccountButton"
+                    android:layout_width="300dp"
+                    android:layout_height="60dp"
+                    android:text="@string/DeleteAccountButtonText"
+                    android:theme="@style/ButtonDeleteTablet"
+
+                    app:layout_constraintTop_toBottomOf="@id/LogoutButton"
+                    app:layout_constraintLeft_toLeftOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/ManagementTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ManagementTitleText"
+                    android:theme="@style/TextSubTitleTablet"
+
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"/>
+
+                <TextView
+                    android:id="@+id/ManagementDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ManagmentDescriptionText"
+                    android:theme="@style/TextTablet"
+
+                    app:layout_constraintTop_toBottomOf="@id/ManagementTitle"
+                    app:layout_constraintLeft_toLeftOf="parent"/>
+
+                <TextView
+                    android:id="@+id/DiagnosticsTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/diagnosticsText"
+                    android:theme="@style/TextSubTitleTablet"
+
+                    app:layout_constraintTop_toBottomOf="@id/ManagementDescription"
+                    app:layout_constraintLeft_toLeftOf="parent"/>
+
+                <CheckBox
+                    android:id="@+id/checkBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layoutDirection="rtl"
+                    android:text="@string/DiagnosticsCheckBoxText"
+                    android:theme="@style/TextTablet"
+
+                    app:layout_constraintTop_toBottomOf="@id/DiagnosticsTitle"
+                    app:layout_constraintLeft_toLeftOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

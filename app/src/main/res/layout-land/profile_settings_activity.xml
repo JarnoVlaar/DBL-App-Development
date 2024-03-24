@@ -1,0 +1,248 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <Button
+                android:id="@+id/ProfileSettingsBackButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:contentDescription="@string/ProfileSettingsBackButtonText"
+                android:drawableLeft="@drawable/arrow_back_ios_24px"
+                android:theme="@style/ButtonIcon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/textAccount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/account_text"
+                android:theme="@style/BoldText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textSize="24sp"/>
+
+            <ImageView
+                android:id="@+id/ProfilePicture"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center_horizontal"
+                android:contentDescription="@string/ProfilePictureDescription"
+                android:scaleType="center"
+                android:scaleX="5"
+                android:scaleY="5"
+                app:srcCompat="@drawable/account_circle_24px"
+                app:layout_constraintTop_toTopOf="@id/textAccount"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/UsernameText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/UsernameText"
+                android:textSize="20sp"
+                android:theme="@style/BoldText"
+                tools:layout_editor_absoluteX="152dp"
+                tools:layout_editor_absoluteY="172dp"
+                app:layout_constraintTop_toBottomOf="@id/ProfilePicture"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/StatisticsTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/StatisticsTitleText"
+                    android:textSize="20sp"
+                    android:theme="@style/BoldText"
+                    tools:layout_editor_absoluteX="264dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/StatisticsWins"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/NumberOfWinsText"
+                    tools:layout_editor_absoluteX="264dp"
+                    tools:layout_editor_absoluteY="28dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/StatisticsTitle"/>
+
+                <TextView
+                    android:id="@+id/StatisticsLoss"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/NumberOfLossesText"
+                    tools:layout_editor_absoluteX="264dp"
+                    tools:layout_editor_absoluteY="47dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/StatisticsWins"/>
+
+
+                <TextView
+                    android:id="@+id/StatisticsTies"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/NumberOfTiesText"
+                    tools:layout_editor_absoluteX="264dp"
+                    tools:layout_editor_absoluteY="66dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/StatisticsLoss"/>
+
+                <TextView
+                    android:id="@+id/StatisticsWinsNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/number_zero"
+                    android:textColor="@color/greenMedium"
+
+                    app:layout_constraintBottom_toBottomOf="@+id/StatisticsWins"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.03"
+                    app:layout_constraintStart_toEndOf="@+id/StatisticsWins"
+                    app:layout_constraintTop_toTopOf="@+id/StatisticsWins"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/StatisticsLossNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/number_zero"
+                    android:textColor="@color/redDark"
+
+                    app:layout_constraintBottom_toTopOf="@+id/StatisticsTiesNumber"
+                    app:layout_constraintEnd_toEndOf="parent"
+
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/StatisticsWinsNumber"
+                    app:layout_constraintTop_toBottomOf="@+id/StatisticsWinsNumber" />
+
+                <TextView
+                    android:id="@+id/StatisticsTiesNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/number_zero"
+                    android:textColor="@color/orangeMedium"
+                    app:layout_constraintBottom_toBottomOf="@+id/StatisticsTies"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/StatisticsLossNumber"
+                    app:layout_constraintTop_toBottomOf="@+id/StatisticsLoss"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <Button
+                    android:id="@+id/LogoutButton"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity=""
+                    android:text="@string/LogoutButtonText"
+                    android:theme="@style/ButtonBlue"
+                    tools:layout_editor_absoluteX="264dp"
+                    tools:layout_editor_absoluteY="154dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/StatisticsTies"/>
+
+                <Button
+                    android:id="@+id/DeleteAccountButton"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/DeleteAccountButtonText"
+                    android:theme="@style/ButtonDelete"
+                    tools:layout_editor_absoluteX="264dp"
+                    tools:layout_editor_absoluteY="195dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/LogoutButton"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/ManagementTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ManagementTitleText"
+                    android:textSize="20sp"
+                    android:theme="@style/BoldText"
+                    tools:layout_editor_absoluteX="527dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/ManagementDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ManagmentDescriptionText"
+                    tools:layout_editor_absoluteX="527dp"
+                    tools:layout_editor_absoluteY="27dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ManagementTitle"/>
+
+                <TextView
+                    android:id="@+id/DiagnosticsTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/diagnosticsText"
+                    android:theme="@style/BoldText"
+                    tools:layout_editor_absoluteX="527dp"
+                    tools:layout_editor_absoluteY="54dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ManagementDescription"/>
+
+                <CheckBox
+                    android:id="@+id/checkBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layoutDirection="rtl"
+                    android:text="@string/DiagnosticsCheckBoxText"
+                    tools:layout_editor_absoluteX="527dp"
+                    tools:layout_editor_absoluteY="77dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/DiagnosticsTitle"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

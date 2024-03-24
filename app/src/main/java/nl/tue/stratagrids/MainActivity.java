@@ -1,5 +1,6 @@
 package nl.tue.stratagrids;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -7,7 +8,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import nl.tue.stratagrids.ui.login.LoginActivity;
 
+import android.view.Gravity;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.view.LayoutInflater;
 
 import com.google.firebase.auth.FirebaseAuth;
 import android.widget.Button;
@@ -40,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void setButtons() {
-        Button profileSettingsButton = findViewById(R.id.ProfileSettingsButton);
+        ImageButton profileSettingsButton = findViewById(R.id.ProfileSettingsButton);
         profileSettingsButton.setOnClickListener(view -> {
             if (fAuth.getCurrentUser() != null) {
                 Intent signUpIntent = new Intent(MainActivity.this, ProfileSettingsActivity.class);
@@ -54,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
 
         Button loginButton = findViewById(R.id.LoginButton);
         loginButton.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, LoginActivity.class)));
+
+        ImageButton rulesButton = findViewById(R.id.RulesButton);
+        rulesButton.setOnClickListener(this::onButtonShowRulesPopupWindowClick);
 
         Button localGameButton = findViewById(R.id.LocalGameButton);
         localGameButton.setOnClickListener(view -> {
@@ -77,5 +87,36 @@ public class MainActivity extends AppCompatActivity {
         b1.setEnabled(login);
         Button b2 = findViewById(R.id.MatchcodeButton);
         b2.setEnabled(login);
+    }
+
+    /**
+     * Create the popup window for the rules
+     *
+     * @param view the current view
+     */
+    public void onButtonShowRulesPopupWindowClick(View view) {
+
+        // inflate the layout of the popup window
+        LayoutInflater inflater = (LayoutInflater)
+                getSystemService(LAYOUT_INFLATER_SERVICE);
+        @SuppressLint("InflateParams")
+        View popupView = inflater.inflate(R.layout.rules_popup, null);
+
+        // create the popup window
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+        // show the popup window
+        // which view you pass in doesn't matter, it is only used for the window tolken
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+        // dismiss the popup window when touched
+        popupView.setOnTouchListener((v, event) -> {
+            popupWindow.dismiss();
+            v.performClick();
+            return true;
+        });
     }
 }

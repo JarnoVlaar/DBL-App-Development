@@ -17,13 +17,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/OngoingMatches"
-            android:theme="@style/BoldText"/>
+            android:theme="@style/TextSubTitleTablet"/>
 
         <TextView
             android:id="@+id/LoggedOutDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/LoggedOutDescriptionText" />
+            android:text="@string/LoggedOutDescriptionText"
+            android:theme="@style/TextTablet"/>
 
         <Space
             android:layout_width="match_parent"
@@ -38,8 +39,8 @@
 
             <ImageView
                 android:id="@+id/CloudOffImage"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="180dp"
+                android:layout_height="120dp"
                 android:contentDescription="@string/NoConnectionImageDescription"
                 android:layout_gravity="center_horizontal"
                 app:srcCompat="@drawable/cloud_off_24px" />
@@ -49,29 +50,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/FeaturesDisabledDescription" />
+                android:text="@string/FeaturesDisabledDescription"
+                android:theme="@style/TextTablet"/>
 
             <TextView
                 android:id="@+id/OnlineMatchmakingText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/OnlineMatchmakingText" />
+                android:text="@string/OnlineMatchmakingText"
+                android:theme="@style/TextTablet"/>
 
             <TextView
                 android:id="@+id/OnlineMatchesWithFriendsText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/OnlineMatchesWithFriendsText" />
+                android:text="@string/OnlineMatchesWithFriendsText"
+                android:theme="@style/TextTablet"/>
         </LinearLayout>
 
         <Button
             android:id="@+id/LoginButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
             android:text="@string/LoginButtonText"
-            android:theme="@style/ButtonBlue"
+            android:theme="@style/ButtonBlueTablet"
             android:layout_gravity="center_horizontal"
             app:cornerRadius="6dp"/>
     </LinearLayout>

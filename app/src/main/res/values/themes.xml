@@ -8,12 +8,24 @@
     <style name="ButtonWhite">
         <item name="colorAccent">@android:color/white</item>
         <item name="colorPrimary">@android:color/white</item>
-        <item name="strokeColor">@color/blue</item>
+        <item name="strokeColor">@color/dark_blue</item>
         <item name="strokeWidth">2dp</item>
-        <item name="android:textColor">@color/blue</item>
-        <item name="colorOnPrimary">@color/blue</item>
+        <item name="android:textColor">@color/dark_blue</item>
+        <item name="colorOnPrimary">@color/dark_blue</item>
         <item name="android:insetLeft">4dp</item>
         <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="ButtonWhiteTablet">
+        <item name="colorAccent">@android:color/white</item>
+        <item name="colorPrimary">@android:color/white</item>
+        <item name="strokeColor">@color/dark_blue</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="android:textColor">@color/dark_blue</item>
+        <item name="colorOnPrimary">@color/dark_blue</item>
+        <item name="android:insetLeft">4dp</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
     <style name="ButtonDelete">
@@ -27,6 +39,18 @@
         <item name="android:padding">10dp</item>
     </style>
 
+    <style name="ButtonDeleteTablet">
+        <item name="colorAccent">@android:color/white</item>
+        <item name="colorPrimary">@android:color/white</item>
+        <item name="strokeColor">@android:color/darker_gray</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="android:textColor">@android:color/holo_red_light</item>
+        <item name="colorOnPrimary">@android:color/holo_red_light</item>
+        <item name="android:insetLeft">4dp</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
     <style name="ButtonBlue">
         <item name="colorAccent">@color/blue</item>
         <item name="colorPrimary">@color/blue</item>
@@ -34,6 +58,16 @@
         <item name="colorOnPrimary">@color/white</item>
         <item name="android:insetLeft">4dp</item>
         <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="ButtonBlueTablet">
+        <item name="colorAccent">@color/blue</item>
+        <item name="colorPrimary">@color/blue</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="android:insetLeft">4dp</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
     <style name="ButtonIcon">
@@ -44,6 +78,25 @@
 
     <style name="BoldText">
         <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextTablet">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="TextTitleTablet">
+        <item name="android:textSize">48sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextSubTitleTablet">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextSubSubTitleTablet">
+        <item name="android:textSize">24sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 

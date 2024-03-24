@@ -44,10 +44,10 @@
             <ImageButton
                 android:contentDescription="@string/RulesButtonContentDescription"
                 android:id="@+id/RulesButton"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:scaleX="2"
-                android:scaleY="2"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:scaleX="4"
+                android:scaleY="4"
                 android:paddingStart="8dp"
                 android:paddingEnd="4dp"
                 android:layout_gravity="start"
@@ -62,17 +62,17 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/offlineText"
-                android:theme="@style/BoldText"/>
+                android:theme="@style/TextTitleTablet"/>
 
             <ImageButton
                 android:contentDescription="@string/ButtonProfileActivityDescription"
                 android:id="@+id/ProfileSettingsButton"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
                 android:src="@drawable/account_circle_24px"
                 android:background="@color/transparent"
-                android:scaleX="2"
-                android:scaleY="2"
+                android:scaleX="4"
+                android:scaleY="4"
                 android:paddingStart="4dp"
                 android:paddingEnd="4dp"/>
         </LinearLayout>
@@ -93,13 +93,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/MatchmakingTitle"
-                android:theme="@style/BoldText" />
+                android:theme="@style/TextSubTitleTablet" />
 
             <TextView
                 android:id="@+id/MatchmakingDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/MatchmakingDescription" />
+                android:text="@string/MatchmakingDescription"
+                android:theme="@style/TextTablet" />
 
             <LinearLayout
                 android:id="@+id/MatchmakingButtons"
@@ -109,30 +110,30 @@
 
                 <Button
                     android:id="@+id/LocalGameButton"
-                    android:layout_width="116dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/LocalGameButtonText"
-                    android:theme="@style/ButtonWhite"
+                    android:theme="@style/ButtonWhiteTablet"
                     app:cornerRadius="6dp"
                     android:layout_marginEnd="10dp"/>
 
                 <Button
                     android:id="@+id/MatchmakingButton"
-                    android:layout_width="120dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/MatchmakingButtonText"
-                    android:theme="@style/ButtonWhite"
+                    android:theme="@style/ButtonWhiteTablet"
                     app:cornerRadius="6dp"
                     android:layout_marginEnd="10dp"/>
 
                 <Button
                     android:id="@+id/MatchcodeButton"
-                    android:layout_width="116dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/MatchcodeButtonText"
-                    android:theme="@style/ButtonWhite"
+                    android:theme="@style/ButtonWhiteTablet"
                     app:cornerRadius="6dp" />
 
             </LinearLayout>

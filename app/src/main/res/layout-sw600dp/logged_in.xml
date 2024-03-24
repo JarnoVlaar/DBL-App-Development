@@ -18,19 +18,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/OngoingMatchestTitle"
-                android:theme="@style/BoldText"/>
+                android:theme="@style/TextSubTitleTablet"/>
 
             <TextView
                 android:id="@+id/YourTurnText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/YourTurnDescription" />
+                android:text="@string/YourTurnDescription"
+                android:theme="@style/TextTablet"/>
 
             <TextView
                 android:id="@+id/OpponentTurnText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="12dp"
-                android:text="@string/OpponentsTurnDescription" />
+                android:text="@string/OpponentsTurnDescription"
+                android:theme="@style/TextTablet"/>
         </LinearLayout>
 </androidx.core.widget.NestedScrollView>
