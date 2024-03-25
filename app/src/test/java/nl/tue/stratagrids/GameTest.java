@@ -1,6 +1,7 @@
 package nl.tue.stratagrids;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 import org.junit.After;
 import org.junit.Before;
@@ -227,5 +228,48 @@ public class GameTest {
         };
 
         assertLinesEqual(expectedHorizontalLines, expectedVerticalLines, horizontalLines, verticalLines);
+    }
+
+    /**
+     * Test invalid move preset, used in later tests
+     */
+    public void testInvalidMoves(int x, int y, String expectedMessage) {
+        System.out.println("Testing game.makeMove() invalid move x: " + x + " - y: " + y);
+
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> gameInstance.makeMove(x,y,1));
+
+        assertEquals(expectedMessage, exception.getMessage());
+    }
+
+    /**
+     * Test a x value that is negative
+     */
+    @Test
+    public void testNegativeX() {
+        testInvalidMoves(-1, 1, "inputted x cannot be negative");
+    }
+
+    /**
+     * Test a y value that is negative
+     */
+    @Test
+    public void testNegativeY() {
+        testInvalidMoves(1, -1, "inputted y cannot be negative");
+    }
+
+    /**
+     * Test a x value that is bigger than the board size
+     */
+    @Test
+    public void testInvalidX() {
+        testInvalidMoves(1000, 1, "inputted x cannot be bigger than the board size");
+    }
+
+    /**
+     * Test a y value that is bigger than the board size
+     */
+    @Test
+    public void testInvalidY() {
+        testInvalidMoves(1, 1000, "inputted y cannot be bigger than the board size");
     }
 }
