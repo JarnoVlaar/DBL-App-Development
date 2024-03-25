@@ -4,8 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class GameTest {
     //The game instance that is used for testing
@@ -117,10 +121,68 @@ public class GameTest {
         }
     }
 
+    /**
+     * Test the method Game.getCurrentPlayer()
+     */
+    @Test
+    public void testGetCurrentPlayer() {
+        System.out.println("Testing Game.getCurrentPlayer()");
+
+        assertEquals("First getCurrentPlayer test is wrong", 1, gameInstance.getCurrentPlayer());
+
+        gameInstance.makeMove(1,2, 2);
+
+        assertEquals("First getCurrentPlayer test is wrong", 2, gameInstance.getCurrentPlayer());
+    }
+
+    /**
+     * Test Game.getScores()
+     */
+    @Test
+    public void testGetScores() {
+        int[][] horizontalLines = new int[][]{
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0}
+        };
+
+        int[][] verticalLines = new int[][]{
+                {1, 0, 0},
+                {1, 0, 0},
+                {0, 0, 1},
+                {0, 0, 0}
+        };
+
+        int[][] capturedBlocks = new int[][] {
+                {1, 1, 2},
+                {0, 1, 2},
+                {2, 2, 2}
+        };
+
+        gameInstance = new Game(verticalLines, horizontalLines, capturedBlocks,
+                defaultSize, 1, defaultPlayerCount );
+
+        Map<Integer, Integer> scores = gameInstance.getScores();
+
+        int score1 = scores.get(1);
+        int score2 = scores.get(2);
+
+        Assert.assertEquals("Player 1 score is not correct", 3, score1);
+        Assert.assertEquals("Player 2 score is not correct", 5, score2);
+    }
+
     //----------------------------------------------------------------------------
     //Tests for makeMove()
     //----------------------------------------------------------------------------
 
+    /**
+     * Default method to test if arrays are equal.
+     *
+     * @param expectedHorizontalLines Expected value of the first array
+     * @param expectedVerticalLines Expected value of the second array
+     * @param horizontalLines value of first array
+     * @param verticalLines value of second array
+     */
     private void assertLinesEqual(int[][] expectedHorizontalLines, int[][] expectedVerticalLines,
                                   int[][] horizontalLines, int[][] verticalLines) {
 
@@ -222,6 +284,35 @@ public class GameTest {
 
         int[][] expectedVerticalLines = new int[][]{
                 {2, 0, 0},
+                {0, 0, 0},
+                {0, 0, 0},
+                {0, 0, 0}
+        };
+
+        assertLinesEqual(expectedHorizontalLines, expectedVerticalLines, horizontalLines, verticalLines);
+    }
+
+    /**
+     * Test duplicate move
+     */
+    @Test
+    public void testDuplicateMove() {
+        System.out.println("Testing game.makeMove() duplicate");
+
+        Assert.assertTrue("Failed valid move", gameInstance.makeMove(0, 1, 2));
+        Assert.assertFalse("Succesful invalid move", gameInstance.makeMove(0,1, 2));
+
+        int[][] horizontalLines = gameInstance.getHorizontalLines();
+        int[][] verticalLines = gameInstance.getVerticalLines();
+
+        int[][] expectedHorizontalLines = new int[][]{
+                {0, 1, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0}
+        };
+
+        int[][] expectedVerticalLines = new int[][]{
+                {0, 0, 0},
                 {0, 0, 0},
                 {0, 0, 0},
                 {0, 0, 0}

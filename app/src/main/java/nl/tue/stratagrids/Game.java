@@ -101,10 +101,10 @@ public class Game {
             throw new IllegalArgumentException("inputted x cannot be negative");
         }
         if (x >= this.size) {
-            throw new IllegalArgumentException("inputted y cannot be negative");
+            throw new IllegalArgumentException("inputted x cannot be bigger than the board size");
         }
         if (y < 0) {
-            throw new IllegalArgumentException("inputted x cannot be bigger than the board size");
+            throw new IllegalArgumentException("inputted y cannot be negative");
         }
         if (y >= this.size) {
             throw new IllegalArgumentException("inputted y cannot be bigger than the board size");
