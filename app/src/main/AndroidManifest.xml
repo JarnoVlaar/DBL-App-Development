@@ -23,7 +23,7 @@
             android:theme="@style/Theme.StrataGrids">
         </activity>
         <activity
-            android:name=".ui.game.GameActivity"
+            android:name=".ui.game.LocalGameActivity"
             android:exported="false"
             android:theme="@style/Theme.StrataGrids">
         </activity>

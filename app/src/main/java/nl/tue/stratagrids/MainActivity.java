@@ -2,18 +2,22 @@ package nl.tue.stratagrids;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.ViewFlipper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import nl.tue.stratagrids.ui.login.LoginActivity;
-
-import android.widget.TextView;
-
 import com.google.firebase.auth.FirebaseAuth;
-import android.widget.Button;
-import android.widget.ViewFlipper;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import nl.tue.stratagrids.ui.game.LocalGameActivity;
+import nl.tue.stratagrids.ui.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,6 +41,31 @@ public class MainActivity extends AppCompatActivity {
         } else {
             switchIncludeLayout(false);
         }
+
+        loadGames();
+    }
+
+    private void loadGames() {
+        List<OnlineGame> games = new ArrayList<>();
+
+        ArrayList<String> gameIdentifiers = new ArrayList<>();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        if (fAuth.getCurrentUser() != null) {
+            db.collection("players").document(fAuth.getCurrentUser().getUid()).get().addOnSuccessListener(documentSnapshot -> {
+                if (documentSnapshot.exists()) {
+                    gameIdentifiers.addAll((ArrayList<String>) documentSnapshot.get("games"));
+                }
+
+                Log.d("GameIdentifiers", gameIdentifiers.toString());
+                for (String gameIdentifier : gameIdentifiers) {
+                    db.collection("games").document(gameIdentifier).get().addOnSuccessListener(documentSnapshot2 -> {
+                        if (documentSnapshot2.exists()) {
+                            games.add(OnlineGame.createFromDocument(documentSnapshot2));
+                        }
+                    });
+                }
+            });
+        }
     }
 
     void setButtons() {
@@ -57,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button localGameButton = findViewById(R.id.LocalGameButton);
         localGameButton.setOnClickListener(view -> {
-            Intent signUpIntent = new Intent(MainActivity.this, GameActivity.class);
+            Intent signUpIntent = new Intent(MainActivity.this, LocalGameActivity.class);
             signUpIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(signUpIntent);
         });

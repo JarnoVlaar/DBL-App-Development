@@ -11,7 +11,7 @@ import java.util.Map;
 import nl.tue.stratagrids.OfflineGame;
 import nl.tue.stratagrids.R;
 
-public class GameActivity extends AppCompatActivity {
+public class LocalGameActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +25,7 @@ public class GameActivity extends AppCompatActivity {
         TextView tvScoreP2 = findViewById(R.id.tvPlayer2Score);
 
         // Set observers
-        game.getCurrentPlayer().observe(this, currentPlayer -> {
+        game.getGame().getCurrentPlayer().observe(this, currentPlayer -> {
             switch (currentPlayer) {
                 case 1:
                     tvTurnIndicator.setText(R.string.local_p1_turn);
@@ -35,8 +35,8 @@ public class GameActivity extends AppCompatActivity {
                     break;
             }
         });
-        game.getTurnCount().observe(this, turnCount -> {
-            Map<Integer, Integer> scores = game.getScores();
+        game.getGame().getTurnCount().observe(this, turnCount -> {
+            Map<Integer, Integer> scores = game.getGame().getScores();
             tvScoreP1.setText(String.valueOf(scores.getOrDefault(1, 0)));
             tvScoreP2.setText(String.valueOf(scores.getOrDefault(2, 0)));
         });
@@ -46,6 +46,6 @@ public class GameActivity extends AppCompatActivity {
 
         // Register game board view
         GameBoardView gameBoardView = findViewById(R.id.gameBoard);
-        gameBoardView.updateGameWith(game);
+        gameBoardView.updateGameWith(game.getGame());
     }
 }

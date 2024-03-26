@@ -7,10 +7,11 @@ import android.graphics.Point;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import nl.tue.stratagrids.AbstractGame;
+import nl.tue.stratagrids.BaseGame;
 
 public class GameBoardView extends View {
     private static final int DOT_RADIUS = 12;
@@ -31,9 +32,9 @@ public class GameBoardView extends View {
     private float yDown;
 
     @Nullable
-    private AbstractGame game;
+    private BaseGame game;
 
-    public void updateGameWith(AbstractGame game) {
+    public void updateGameWith(BaseGame game) {
         this.game = game;
         invalidate();
     }
@@ -90,7 +91,7 @@ public class GameBoardView extends View {
         int row = getRowFromY(pointY);
         double centerX = getXFromColumn(column);
         double centerY = getYFromRow(row);
-        if (Math.sqrt(Math.pow(pointX - centerX, 2) + Math.pow(pointY - centerY , 2)) < DOT_RADIUS * 2.0f * getScaleFactor()) {
+        if (Math.sqrt(Math.pow(pointX - centerX, 2) + Math.pow(pointY - centerY, 2)) < DOT_RADIUS * 2.0f * getScaleFactor()) {
             return new Point(column, row);
         }
         return null;
