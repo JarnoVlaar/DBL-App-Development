@@ -1,11 +1,17 @@
 package nl.tue.stratagrids.ui.login;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -49,6 +55,8 @@ public class LoginActivity extends AppCompatActivity{
         fAuth = FirebaseAuth.getInstance();
 
         addButtonListeners();
+
+
 
 }
 
@@ -102,6 +110,18 @@ private void addButtonListeners() {
         Intent signUpIntent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
         signUpIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(signUpIntent);
+    });
+
+    // Makes it so pressing 'finish' on the password field automatically performs login
+    mPassword.setOnEditorActionListener((v, actionId, event) -> {
+        boolean handled = false;
+        if (actionId == EditorInfo.IME_ACTION_DONE) {
+            mLoginBtn.performClick();
+            InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), 0);
+            handled = true;
+        }
+        return handled;
     });
 
 }
