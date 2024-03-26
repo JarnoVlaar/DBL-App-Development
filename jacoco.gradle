@@ -1,9 +1,8 @@
-
 //List of modules that don't require Jacoco
 def ignoredByJacoco = []
 def fileFilter = []
 def buildKotlinClasses = "/tmp/kotlin-classes/debug"
-def buildJavaClasses = "/intermediates/javac/debug/classes"
+def buildJavaClasses = "/intermediates/javac/debug/compileDebugJavaWithJavac/classes"
 def testExecutionFile = "/outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec"
 
 //List of files that can be ignored for test coverage
@@ -44,14 +43,13 @@ subprojects { project ->
                               "$projectBuildFolder" + "$buildJavaClasses"]
 
             buildDebug.each { classPath ->
-                debugTree += fileTree(dir: classPath, includes: fileFilter,  excludes: coverageExclusions)
+                debugTree += fileTree(dir: classPath, includes: fileFilter, excludes: coverageExclusions)
             }
 
             def mainSrc = "$projectFolder/src/main/java"
             sourceDirectories.from = files([mainSrc])
             classDirectories.from = files([debugTree])
             executionData.from = files("$projectBuildFolder" + "$testExecutionFile")
-
             reports {
                 xml.required = true
                 html.required = true
@@ -91,9 +89,13 @@ task jacocoFullReport(name: 'jacocoFullReport', type: JacocoReport, group: 'Cove
                           "$prj.buildDir" + "$buildJavaClasses"]
 
         buildDebug.each { classPath ->
+            println("classPath: $classPath")
             tree += fileTree(dir: classPath, includes: fileFilter, excludes: coverageExclusions)
         }
     }
+
+    println("dirs: $dirs")
+    tree.forEach { println(it) }
 
     additionalSourceDirs.setFrom(files(dirs))
     sourceDirectories.from = files(dirs)
