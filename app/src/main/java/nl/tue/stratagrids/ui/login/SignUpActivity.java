@@ -56,7 +56,7 @@ public class SignUpActivity extends AppCompatActivity{
         mConfirmPassword = findViewById(R.id.ConfirmPassword);
 
         mSignUpBtn = findViewById(R.id.SignUpButton);
-        mBackButton = findViewById(R.id.LeaveSignInPage);
+        mBackButton = findViewById(R.id.buttonClose);
 
         mTermsBox = findViewById(R.id.CheckBox);
 

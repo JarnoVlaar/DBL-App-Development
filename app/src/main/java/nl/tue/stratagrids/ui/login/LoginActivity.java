@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity{
     Button mLoginBtn;
     Button mSignUpBtn;
     Button mOfflinePlayBtn;
+    Button mForgotPasswordBtn;
 
     FirebaseAuth fAuth;
 
@@ -43,6 +44,7 @@ public class LoginActivity extends AppCompatActivity{
         mLoginBtn = findViewById(R.id.loginButton);
         mSignUpBtn = findViewById(R.id.registerNow);
         mOfflinePlayBtn = findViewById(R.id.playOffline);
+        mForgotPasswordBtn = findViewById(R.id.forgotPassword);
 
         fAuth = FirebaseAuth.getInstance();
 
@@ -95,6 +97,13 @@ private void addButtonListeners() {
         startActivity(loginIntent);
         finish();
     });
+
+    mForgotPasswordBtn.setOnClickListener(view -> {
+        Intent signUpIntent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+        signUpIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(signUpIntent);
+    });
+
 }
 
 private boolean basicInputValidation(String email, String password) {
