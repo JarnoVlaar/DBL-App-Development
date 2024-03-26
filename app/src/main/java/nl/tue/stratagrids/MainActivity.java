@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import nl.tue.stratagrids.ui.login.LoginActivity;
 
@@ -44,6 +45,13 @@ public class MainActivity extends AppCompatActivity {
         } else {
             switchIncludeLayout(false);
         }
+
+        //Recyclerview test
+        RecyclerView recyclerView = findViewById(R.id.reyclerViewOngoing);
+        String[] test = {"test"};
+        RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> customAdapter = new RecycleViewAdapter(test);
+        recyclerView.setAdapter(customAdapter);
+
     }
 
     void setButtons() {

@@ -26,11 +26,20 @@
                 android:layout_height="wrap_content"
                 android:text="@string/YourTurnDescription" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/reyclerViewOngoing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
             <TextView
                 android:id="@+id/OpponentTurnText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="12dp"
                 android:text="@string/OpponentsTurnDescription" />
+
+
         </LinearLayout>
 </androidx.core.widget.NestedScrollView>
