@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +14,7 @@ import android.widget.ViewFlipper;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import java.util.Objects;
 
 import nl.tue.stratagrids.ui.game.LocalGameActivity;
@@ -46,9 +47,19 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-
-
         fAuth = FirebaseAuth.getInstance();
+
+        MainViewModel viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+
+        // Listen for changes in online games
+        viewModel.getOnlineGames().observe(this, onlineGames -> {
+            // Update UI
+        });
+
+        // Refresh online games if user is logged in
+        if (fAuth.getCurrentUser() != null) {
+            viewModel.refreshOnlineGames();
+        }
 
         // Set username to top bar if user is logged in
         if (fAuth.getCurrentUser() != null) {
@@ -213,42 +224,6 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Matchmaking failed", Toast.LENGTH_SHORT).show();
                 });
 
-    }
-
-    /**
-     * Load the games of the current user from Firestore
-     * @modifies Firestore
-     * @modifies the games list
-     */
-    private void loadGames() {
-        List<OnlineGame> games = new ArrayList<>();
-
-        ArrayList<String> gameIdentifiers = new ArrayList<>();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        if (fAuth.getCurrentUser() != null) {
-            db.collection("players").document(fAuth.getCurrentUser().getUid()).get().addOnSuccessListener(documentSnapshot -> {
-                if (documentSnapshot.exists()) {
-                    Object gamesObj = documentSnapshot.get("games");
-                    if (gamesObj instanceof ArrayList<?>) {
-                        ArrayList<?> gamesList = (ArrayList<?>) gamesObj;
-                        for (Object gameObj : gamesList) {
-                            if (gameObj instanceof String) {
-                                gameIdentifiers.add((String) gameObj);
-                            }
-                        }
-                    }
-                }
-
-                Log.d("GameIdentifiers", gameIdentifiers.toString());
-                for (String gameIdentifier : gameIdentifiers) {
-                    db.collection("games").document(gameIdentifier).get().addOnSuccessListener(documentSnapshot2 -> {
-                        if (documentSnapshot2.exists()) {
-                            games.add(OnlineGame.createFromDocument(documentSnapshot2));
-                        }
-                    });
-                }
-            });
-        }
     }
 
     /**
