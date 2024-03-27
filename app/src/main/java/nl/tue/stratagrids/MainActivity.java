@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,11 +21,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
 import java.util.Objects;
 
 import nl.tue.stratagrids.ui.game.LocalGameActivity;
@@ -37,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Create the main activity
+     *
      * @param savedInstanceState the saved instance state
      * @modifies this
      * @modifies the view
@@ -72,12 +71,11 @@ public class MainActivity extends AppCompatActivity {
 
         checkIfMatchmaking();
         setButtons();
-        loadGames();
-
     }
 
     /**
      * Check if the current user is in matchmaking
+     *
      * @modifies this.isMatchmaking
      */
     private void checkIfMatchmaking() {
@@ -104,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Set the matchmaking button to either start or stop matchmaking
+     *
      * @modifies this.isMatchmaking
      * @modifies the matchmaking button
      */
@@ -118,11 +117,12 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Set the matchmaking button to stop matchmaking
+     *
      * @modifies this.isMatchmaking
      * @modifies the matchmaking button
      * @pre this.isMatchmaking == true
      */
-    private void setAsStopMatchmakingButton(){
+    private void setAsStopMatchmakingButton() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Button matchmakingButton = findViewById(R.id.MatchmakingButton);
         matchmakingButton.setText("Stop");
@@ -138,11 +138,12 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Set the matchmaking button to start matchmaking
+     *
      * @modifies this.isMatchmaking
      * @modifies the matchmaking button
      * @pre this.isMatchmaking == false
      */
-    private void setAsStartMatchmakingButton(){
+    private void setAsStartMatchmakingButton() {
         Button matchmakingButton = findViewById(R.id.MatchmakingButton);
         matchmakingButton.setText("Matchmaking");
         matchmakingButton.setOnClickListener(view -> {
@@ -166,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Upload the matchmaking data to Firestore
+     *
      * @param location the location of the user
      * @modifies Firestore
      * @modifies this.isMatchmaking
@@ -174,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
      * @modifies the matchmaking collection in Firestore
      * @pre current user is not null
      */
-    private void uploadMatchmaking(Location location){
+    private void uploadMatchmaking(Location location) {
         // Get an instance of Firestore
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -228,6 +230,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Set the buttons of the main activity
+     *
      * @modifies the buttons
      */
     public void setButtons() {
@@ -255,7 +258,6 @@ public class MainActivity extends AppCompatActivity {
             signUpIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(signUpIntent);
         });
-
 
 
     }
