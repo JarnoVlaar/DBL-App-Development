@@ -56,4 +56,6 @@ public class OnlineGame extends BaseGame {
         }
         return new OnlineGame(capturedBlocks, verticalLines, horizontalLines, size, playerIdsArray, playerTurn, turnCount, document.getId(), winnerId);
     }
+
+    //TODO: Add methods for; Retrieving opponent name, Getting if it your turn or not
 }

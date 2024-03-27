@@ -10,6 +10,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import nl.tue.stratagrids.ui.login.LoginActivity;
@@ -35,6 +36,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -86,8 +88,9 @@ public class MainActivity extends AppCompatActivity {
 
         //Recyclerview test
         RecyclerView recyclerView = findViewById(R.id.reyclerViewOngoing);
-        String[] test = {"test"};
-        RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> customAdapter = new RecycleViewAdapter(test);
+        String[] test = {"Game against Pijke", "Another test object"};
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> customAdapter = new RecycleViewAdapter(viewModel.getOnlineGames().getValue());
         recyclerView.setAdapter(customAdapter);
 
 

@@ -11,7 +11,7 @@ import java.util.List;
 
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> {
 
-    private String[] localDataSet;
+    private List<OnlineGame> localDataSet;
 
     /**
      * Provide a reference to the type of views that you are using
@@ -24,7 +24,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
             super(view);
             // Define click listener for the ViewHolder's View
 
-            textView = (TextView) view.findViewById(R.id.textView);
+            textView = (TextView) view.findViewById(R.id.textGameAgainst);
         }
 
         public TextView getTextView() {
@@ -38,7 +38,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
      * @param dataSet String[] containing the data to populate views to be used
      * by RecyclerView
      */
-    public RecycleViewAdapter(String[] dataSet) {
+    public RecycleViewAdapter(List<OnlineGame> dataSet) {
         localDataSet = dataSet;
     }
 
@@ -55,6 +55,9 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
+        // TODO: Make it change values based on online game data.
+
+        // viewHolder.getTextView().setText(localDataSet.get(position).getCurrentPlayer());
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
@@ -64,6 +67,6 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return localDataSet.length;
+        return localDataSet.size();
     }
 }
