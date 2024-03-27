@@ -24,8 +24,6 @@ public class MainViewModel extends ViewModel {
     }
 
     public void refreshOnlineGames() {
-        List<OnlineGame> games = new ArrayList<>();
-
         FirebaseAuth fAuth = FirebaseAuth.getInstance();
         if (fAuth.getCurrentUser() != null) {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -42,16 +40,21 @@ public class MainViewModel extends ViewModel {
                     }
                 }
                 Log.d("GameIdentifiers", gameIdentifiers.toString());
+
+                List<OnlineGame> games = new ArrayList<>();
                 for (String gameIdentifier : gameIdentifiers) {
                     db.collection("games").document(gameIdentifier).get().addOnSuccessListener(documentSnapshot2 -> {
                         if (documentSnapshot2.exists()) {
                             games.add(OnlineGame.createFromDocument(documentSnapshot2));
                         }
+
+                        // Notify if all games have been loaded
+                        if (games.size() == gameIdentifiers.size()) {
+                            onlineGames.setValue(games);
+                        }
                     });
                 }
             });
         }
-
-        onlineGames.setValue(games);
     }
 }

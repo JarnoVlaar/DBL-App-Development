@@ -101,4 +101,10 @@
     <string name="forgot_password_no_worries">No worries, reset your password here.</string>
     <string name="lost_something">Lost something?</string>
     <string name="mail_sent">Mail sent!</string>
+    <string name="game_against">"Game against: %1$s"</string>
+    <string name="number">"%1$d"</string>
+    <string name="game_against_no_placeholder">Game against:</string>
+    <string name="play">Play</string>
+    <string name="score">Score:</string>
+
 </resources>

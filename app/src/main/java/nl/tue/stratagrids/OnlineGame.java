@@ -3,12 +3,14 @@ package nl.tue.stratagrids;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class OnlineGame extends BaseGame {
 
     private final String gameId;
     private final String winnerId;
     private final String[] playerIds;
+
 
     public OnlineGame(int[][] capturedBlocks, int[][] verticalLines, int[][] horizontalLines, int size, String[] playerIds, int playerTurn, int turnCount, String gameId, String winnerId) {
         super(verticalLines, horizontalLines, capturedBlocks, size, playerTurn, playerIds.length, turnCount);
@@ -57,5 +59,34 @@ public class OnlineGame extends BaseGame {
         return new OnlineGame(capturedBlocks, verticalLines, horizontalLines, size, playerIdsArray, playerTurn, turnCount, document.getId(), winnerId);
     }
 
-    //TODO: Add methods for; Retrieving opponent name, Getting if it your turn or not
+    /**
+     * Returns if the player associated with the given UUID is currently the one who's turn it is.
+     * If the player is not participating in this game it returns false.
+     * @param loggedInUUID The Firebase Auth UUID of the player
+     * @return true if the loggedInUUID matches the player that is currently on turn in the online game.
+     */
+    public boolean hasTurnNow(String loggedInUUID) {
+        if (Objects.equals(loggedInUUID, playerIds[currentPlayer.getValue()])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Returns the other player than the UUID that is entered.
+     * Returns null if the player is not participating in the game.
+     * @param currentUserUUID the user
+     * @return the UUID of the opponent.
+     */
+    public String getOpponentID(String currentUserUUID) {
+        if (playerIds[0].equals(currentUserUUID)) {
+            return playerIds[1];
+        }
+        if (playerIds[1].equals(currentUserUUID)) {
+            return playerIds[0];
+        } else {
+            return null;
+        }
+    }
 }

@@ -35,6 +35,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth fAuth;
     Boolean isMatchmaking = false;
+
+    static final String TAG = "MainActivity";
 
     /**
      * Create the main activity
@@ -67,14 +70,28 @@ public class MainActivity extends AppCompatActivity {
 
         MainViewModel viewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
+        RecyclerView recyclerView = findViewById(R.id.reyclerViewOngoing);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Set empty adapter until data has finished loading
+        recyclerView.setAdapter(new RecycleViewAdapter(new ArrayList<OnlineGame>(), this));
+
+
         // Listen for changes in online games
         viewModel.getOnlineGames().observe(this, onlineGames -> {
             // Update UI
+            //Recyclerview test
+
+            Log.d(TAG, "onCreate: " + Objects.requireNonNull(viewModel.getOnlineGames().getValue()).size());
+            RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> customAdapter = new RecycleViewAdapter(viewModel.getOnlineGames().getValue(), this);
+            recyclerView.setAdapter(customAdapter);
         });
 
         // Refresh online games if user is logged in
         if (fAuth.getCurrentUser() != null) {
             viewModel.refreshOnlineGames();
+
+
         }
 
         // Set username to top bar if user is logged in
@@ -85,13 +102,6 @@ public class MainActivity extends AppCompatActivity {
         } else {
             switchIncludeLayout(false);
         }
-
-        //Recyclerview test
-        RecyclerView recyclerView = findViewById(R.id.reyclerViewOngoing);
-        String[] test = {"Game against Pijke", "Another test object"};
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> customAdapter = new RecycleViewAdapter(viewModel.getOnlineGames().getValue());
-        recyclerView.setAdapter(customAdapter);
 
 
         checkIfMatchmaking();

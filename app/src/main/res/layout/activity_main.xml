@@ -122,6 +122,10 @@
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:text="@string/MatchmakingButtonText"
+                    android:autoSizeTextType="uniform"
+                    android:autoSizeMinTextSize="12sp"
+                    android:autoSizeMaxTextSize="100sp"
+                    android:autoSizeStepGranularity="2sp"
                     android:theme="@style/ButtonWhite"
                     app:cornerRadius="6dp"
                     android:layout_marginEnd="10dp"/>
