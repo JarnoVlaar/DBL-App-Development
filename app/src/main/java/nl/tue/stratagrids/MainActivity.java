@@ -2,18 +2,15 @@ package nl.tue.stratagrids;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import nl.tue.stratagrids.ui.game.LocalGameActivity;
@@ -33,6 +30,18 @@ public class MainActivity extends AppCompatActivity {
 
         fAuth = FirebaseAuth.getInstance();
 
+        MainViewModel viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+
+        // Listen for changes in online games
+        viewModel.getOnlineGames().observe(this, onlineGames -> {
+            // Update UI
+        });
+
+        // Refresh online games if user is logged in
+        if (fAuth.getCurrentUser() != null) {
+            viewModel.refreshOnlineGames();
+        }
+
         // Set username to top bar if user is logged in
         if (fAuth.getCurrentUser() != null) {
             TextView textview = findViewById(R.id.UsernameText);
@@ -40,31 +49,6 @@ public class MainActivity extends AppCompatActivity {
             switchIncludeLayout(true);
         } else {
             switchIncludeLayout(false);
-        }
-
-        loadGames();
-    }
-
-    private void loadGames() {
-        List<OnlineGame> games = new ArrayList<>();
-
-        ArrayList<String> gameIdentifiers = new ArrayList<>();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        if (fAuth.getCurrentUser() != null) {
-            db.collection("players").document(fAuth.getCurrentUser().getUid()).get().addOnSuccessListener(documentSnapshot -> {
-                if (documentSnapshot.exists()) {
-                    gameIdentifiers.addAll((ArrayList<String>) documentSnapshot.get("games"));
-                }
-
-                Log.d("GameIdentifiers", gameIdentifiers.toString());
-                for (String gameIdentifier : gameIdentifiers) {
-                    db.collection("games").document(gameIdentifier).get().addOnSuccessListener(documentSnapshot2 -> {
-                        if (documentSnapshot2.exists()) {
-                            games.add(OnlineGame.createFromDocument(documentSnapshot2));
-                        }
-                    });
-                }
-            });
         }
     }
 
