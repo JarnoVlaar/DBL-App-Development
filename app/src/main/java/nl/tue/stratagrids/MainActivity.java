@@ -5,10 +5,12 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,11 +25,11 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -42,12 +44,22 @@ import java.util.Map;
 import java.util.Objects;
 
 import nl.tue.stratagrids.ui.game.LocalGameActivity;
-import nl.tue.stratagrids.ui.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth fAuth;
     Boolean isMatchmaking = false;
+
+    RecyclerView recyclerViewMyTurn;
+    RecyclerView recyclerViewOpponentTurn;
+
+    ProgressBar progressBarMatches;
+
+    MainViewModel viewModel;
+
+
+
+
 
     static final String TAG = "MainActivity";
 
@@ -61,38 +73,54 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate: Running onCreate");
 
         setContentView(R.layout.activity_main);
 
-        setButtons();
-
         fAuth = FirebaseAuth.getInstance();
 
-        MainViewModel viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        progressBarMatches = findViewById(R.id.progressBarMatches);
 
-        RecyclerView recyclerView = findViewById(R.id.reyclerViewOngoing);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Recycler view's setup
+        recyclerViewMyTurn = findViewById(R.id.reyclerViewYourTurn);
+        recyclerViewMyTurn.setLayoutManager(new LinearLayoutManager(this));
+
+        recyclerViewOpponentTurn = findViewById(R.id.reyclerViewOpponentTurn);
+        recyclerViewOpponentTurn.setLayoutManager(new LinearLayoutManager(this));
 
         // Set empty adapter until data has finished loading
-        recyclerView.setAdapter(new RecycleViewAdapter(new ArrayList<OnlineGame>(), this));
+        recyclerViewMyTurn.setAdapter(new RecycleViewAdapter(new ArrayList<OnlineGame>(), this));
+        recyclerViewOpponentTurn.setAdapter(new RecycleViewAdapter(new ArrayList<OnlineGame>(), this));
 
+        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
         // Listen for changes in online games
         viewModel.getOnlineGames().observe(this, onlineGames -> {
             // Update UI
             //Recyclerview test
 
+
             Log.d(TAG, "onCreate: " + Objects.requireNonNull(viewModel.getOnlineGames().getValue()).size());
-            RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> customAdapter = new RecycleViewAdapter(viewModel.getOnlineGames().getValue(), this);
-            recyclerView.setAdapter(customAdapter);
+            ArrayList<OnlineGame>[] dividedGames = divideGames(viewModel.getOnlineGames().getValue());
+            Log.d(TAG, "myTurn size: " + dividedGames[0].size() + " opponentTurn size: " + dividedGames[1].size());
+            RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> myTurnAdapter = new RecycleViewAdapter(dividedGames[0], this);
+            RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> opponentTurnAdapter = new RecycleViewAdapter(dividedGames[1], this);
+            recyclerViewMyTurn.setAdapter(myTurnAdapter);
+            recyclerViewOpponentTurn.setAdapter(opponentTurnAdapter);
+
+            progressBarMatches.setVisibility(View.GONE);
+
+
         });
 
         // Refresh online games if user is logged in
-        if (fAuth.getCurrentUser() != null) {
+        if (fAuth.getCurrentUser() != null && savedInstanceState == null) {
+            progressBarMatches.setVisibility(View.VISIBLE);
             viewModel.refreshOnlineGames();
-
-
         }
+
+
 
         // Set username to top bar if user is logged in
         if (fAuth.getCurrentUser() != null) {
@@ -103,9 +131,15 @@ public class MainActivity extends AppCompatActivity {
             switchIncludeLayout(false);
         }
 
-
         checkIfMatchmaking();
         setButtons();
+    }
+
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        setContentView(R.layout.activity_main);
     }
 
     /**
@@ -263,6 +297,25 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    private ArrayList<OnlineGame>[] divideGames(List<OnlineGame> games) {
+        ArrayList<OnlineGame> myTurn = new ArrayList<OnlineGame>();
+        ArrayList<OnlineGame> opponentTurn = new ArrayList<OnlineGame>();
+
+        String currentUserID = fAuth.getCurrentUser().getUid();
+
+        for (OnlineGame game : games) {
+            if (game.hasTurnNow(currentUserID)) {
+                myTurn.add(game);
+            } else {
+                opponentTurn.add(game);
+            }
+        }
+
+        ArrayList<OnlineGame>[] outputArray = new ArrayList[]{myTurn, opponentTurn};
+        return outputArray;
+    }
+
     /**
      * Set the buttons of the main activity
      *
@@ -344,4 +397,6 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
     }
+
+
 }

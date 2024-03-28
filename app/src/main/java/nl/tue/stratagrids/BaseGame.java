@@ -1,5 +1,7 @@
 package nl.tue.stratagrids;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -112,6 +114,7 @@ public class BaseGame {
     public boolean makeMove(int x, int y, int alignment) {
         // Save the scores before the move
         HashMap<Integer, Integer> oldScores = checkScore();
+        Log.d("BaseGame", "makeMove: x:" + x + " y:" + y);
 
         // alignment where 1 is vertical, 2 is horizontal
         if (alignment == 1) {

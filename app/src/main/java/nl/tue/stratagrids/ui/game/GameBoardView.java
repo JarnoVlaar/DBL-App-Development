@@ -20,8 +20,8 @@ public class GameBoardView extends View {
     private static final int LINE_WIDTH = 12;
     private static final int LINE_STROKE_WIDTH = 3;
 
-    private static final int PLAYER1_COLOR = 0xFF3AC0A0;
-    private static final int PLAYER2_COLOR = 0xFFFFB37C;
+    private static int player1Color = 0xFF3AC0A0;
+    private static int player2Color = 0xFFFFB37C;
     private static final int NO_PLAYER_COLOR = 0xFFEAF2FF;
     private static final int STROKE_COLOR = 0xFF494A50;
 
@@ -39,6 +39,25 @@ public class GameBoardView extends View {
         invalidate();
     }
 
+    /**
+     * Constructor for use with Online game.
+     * We want the user of the app to always be green, if this is not the case this constructor can
+     * be used with {@code keepColors = false} to swap
+     * @param game
+     * @param keepColors
+     */
+    public void updateGameWith(BaseGame game, boolean keepColors) {
+        this.game = game;
+
+        if (!keepColors) {
+            int tempColor = player1Color;
+            player1Color = player2Color;
+            player2Color = tempColor;
+        }
+
+        invalidate();
+    }
+
     public GameBoardView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -49,8 +68,8 @@ public class GameBoardView extends View {
             playerPaints[i].setAntiAlias(true);
         }
         playerPaints[0].setColor(NO_PLAYER_COLOR);
-        playerPaints[1].setColor(PLAYER1_COLOR);
-        playerPaints[2].setColor(PLAYER2_COLOR);
+        playerPaints[1].setColor(player1Color);
+        playerPaints[2].setColor(player2Color);
 
         strokePaint = new Paint();
         strokePaint.setColor(STROKE_COLOR);

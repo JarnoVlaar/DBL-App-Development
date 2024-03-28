@@ -1,6 +1,7 @@
 package nl.tue.stratagrids;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -77,6 +79,8 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         this.localDataSet = dataSet;
         this.context = context;
         fAuth = FirebaseAuth.getInstance();
+
+        localDataSet.sort(Comparator.comparing(item -> item.getOpponentID(fAuth.getCurrentUser().getUid())));
     }
 
     // Create new views (invoked by the layout manager)
@@ -95,9 +99,16 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         // TODO: Make it change values based on online game data.
 
         Map<Integer, Integer> scores = localDataSet.get(position).getScores();
-        viewHolder.getTextScorePlayer1().setText(context.getString(R.string.number,scores.get(1)));
-        viewHolder.gettextScorePlayer2().setText(context.getString(R.string.number,scores.get(2)));
-        viewHolder.getgameBoardView().updateGameWith(localDataSet.get(position));
+        boolean currentUserIsPlayer1 = localDataSet.get(position).isPlayer1(fAuth.getCurrentUser().getUid());
+
+        if (currentUserIsPlayer1) {
+            viewHolder.getTextScorePlayer1().setText(context.getString(R.string.number, scores.get(1)));
+            viewHolder.gettextScorePlayer2().setText(context.getString(R.string.number, scores.get(2)));
+        } else {
+            viewHolder.getTextScorePlayer1().setText(context.getString(R.string.number, scores.get(2)));
+            viewHolder.gettextScorePlayer2().setText(context.getString(R.string.number, scores.get(1)));
+        }
+        viewHolder.getgameBoardView().updateGameWith(localDataSet.get(position), currentUserIsPlayer1);
 
         // Set title
         String opponentID = localDataSet.get(position).getOpponentID(fAuth.getCurrentUser().getUid());
@@ -135,4 +146,5 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     public int getItemCount() {
         return localDataSet.size();
     }
+
 }

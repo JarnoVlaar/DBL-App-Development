@@ -29,7 +29,7 @@ public class OnlineGame extends BaseGame {
             return null;
         }
         String winnerId = document.getString("winnerID");
-        int size = document.getLong("gridSize").intValue();
+        int size = document.getLong("gridSize").intValue() + 1;
         int playerTurn = document.getLong("playerTurn").intValue();
         int turnCount = document.getLong("turnCount").intValue();
         ArrayList<String> playerIds = (ArrayList<String>) document.get("playerIDs");
@@ -66,7 +66,8 @@ public class OnlineGame extends BaseGame {
      * @return true if the loggedInUUID matches the player that is currently on turn in the online game.
      */
     public boolean hasTurnNow(String loggedInUUID) {
-        if (Objects.equals(loggedInUUID, playerIds[currentPlayer.getValue()])) {
+        // TODO: Verify if player turns are noted as 0-1 or 1-2, now 1-2 is assumed.
+        if (Objects.equals(loggedInUUID, playerIds[currentPlayer.getValue() - 1])) {
             return true;
         } else {
             return false;
@@ -88,5 +89,14 @@ public class OnlineGame extends BaseGame {
         } else {
             return null;
         }
+    }
+
+    /**
+     * Returns if the given player is Player 1 in the game data.
+     * @param userUUID the UUID of the user to check
+     * @return true if the userUUID is Player 1 in the game data, false if not.
+     */
+    public boolean isPlayer1(String userUUID) {
+        return Objects.equals(playerIds[0], userUUID);
     }
 }
