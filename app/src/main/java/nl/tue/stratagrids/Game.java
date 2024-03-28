@@ -93,8 +93,23 @@ public class Game {
      * @modifies the currentPlayer
      * @modifies the scores
      * @return true if the move was successful
+     *
+     * @throws IllegalArgumentException if {@code x < 0 || x >= this.size || y < 0 || y >= this.size }
      */
-    public boolean makeMove(int x, int y, int alignment) {
+    public boolean makeMove(int x, int y, int alignment) throws IllegalArgumentException {
+        if (x < 0) {
+            throw new IllegalArgumentException("inputted x cannot be negative");
+        }
+        if (x >= this.size) {
+            throw new IllegalArgumentException("inputted x cannot be bigger than the board size");
+        }
+        if (y < 0) {
+            throw new IllegalArgumentException("inputted y cannot be negative");
+        }
+        if (y >= this.size) {
+            throw new IllegalArgumentException("inputted y cannot be bigger than the board size");
+        }
+
         // Save the scores before the move
         HashMap<Integer,Integer> oldScores = checkScore();
 

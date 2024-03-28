@@ -9,7 +9,7 @@ buildscript {
 plugins {
     id("com.android.application") version "8.3.0" apply false
     id("jacoco")
-    id("org.sonarqube") version "4.3.1.3277"
+    id("org.sonarqube") version "3.5.0.2730"
 }
 
 apply {
